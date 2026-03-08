@@ -11,12 +11,11 @@ export default function About() {
                     {/* Image */}
                     <motion.div
                         className="about-image-wrapper"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <div className="about-image-ring" />
                         <img src={aboutImg} alt="Christalin Mirrors Salon" className="about-image" loading="lazy" />
                     </motion.div>
 
