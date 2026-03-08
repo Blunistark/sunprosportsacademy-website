@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -9,13 +11,27 @@ import Gallery from './components/Gallery'
 import Branches from './components/Branches'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import LoadingScreen from './components/LoadingScreen'
 
 export default function App() {
     const { theme, toggleTheme } = useTheme()
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        // Simulate loading assets
+        const timer = setTimeout(() => {
+            setIsLoading(false)
+        }, 2000)
+        return () => clearTimeout(timer)
+    }, [])
 
     return (
         <>
-            <Navbar theme={theme} toggleTheme={toggleTheme} />
+            <AnimatePresence>
+                {isLoading && <LoadingScreen key="loader" />}
+            </AnimatePresence>
+
+            <Navbar theme={theme} toggleTheme={toggleTheme} isAppLoading={isLoading} />
             <main>
                 <Hero />
                 <About />

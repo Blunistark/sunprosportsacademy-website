@@ -7,9 +7,10 @@ import './Navbar.css'
 interface NavbarProps {
     theme: 'dark' | 'light'
     toggleTheme: () => void
+    isAppLoading?: boolean
 }
 
-export default function Navbar({ theme, toggleTheme }: NavbarProps) {
+export default function Navbar({ theme, toggleTheme, isAppLoading }: NavbarProps) {
     const [scrolled, setScrolled] = useState(false)
     const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -35,18 +36,19 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
     return (
         <>
             <motion.nav
-                className={`navbar ${scrolled ? 'scrolled' : ''}`}
-                initial={{ y: -80, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className={`navbar ${scrolled ? 'scrolled' : ''} ${isAppLoading ? 'loading' : ''}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
             >
                 <div className="navbar-inner">
-                    <a href="#" className="navbar-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-                        <img src={cmLogo} alt="CM" className="navbar-logo-img" />
-                    </a>
-
-                    <ul className="navbar-links">
-                        {navLinks.map(link => (
+                    {/* Left Side Links */}
+                    <motion.ul
+                        className="navbar-links left"
+                        animate={{ opacity: isAppLoading ? 0 : 1 }}
+                        transition={{ delay: 1, duration: 0.5 }}
+                    >
+                        {navLinks.slice(0, 2).map(link => (
                             <li key={link.href}>
                                 <a
                                     href={link.href}
@@ -57,28 +59,73 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
                                 </a>
                             </li>
                         ))}
-                    </ul>
+                    </motion.ul>
 
-                    <div className="navbar-actions">
-                        <button
-                            className="theme-toggle"
-                            onClick={toggleTheme}
-                            aria-label="Toggle theme"
+                    {/* Centered Logo Container */}
+                    <div className="navbar-logo-container">
+                        {!isAppLoading && (
+                            <motion.a
+                                href="#"
+                                className="navbar-logo"
+                                onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                                layoutId="main-logo"
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 70,
+                                    damping: 24,
+                                    mass: 1.2
+                                }}
+                            >
+                                <img src={cmLogo} alt="CM" className="navbar-logo-img" />
+                            </motion.a>
+                        )}
+                    </div>
+
+                    {/* Right Side Links & Actions */}
+                    <div className="navbar-actions-group">
+                        <motion.ul
+                            className="navbar-links right"
+                            animate={{ opacity: isAppLoading ? 0 : 1 }}
+                            transition={{ delay: 1, duration: 0.5 }}
                         >
-                            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                        </button>
+                            {navLinks.slice(2).map(link => (
+                                <li key={link.href}>
+                                    <a
+                                        href={link.href}
+                                        className="navbar-link"
+                                        onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
+                                    >
+                                        {link.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </motion.ul>
 
-                        <a href="#contact" className="navbar-cta desktop-only" onClick={(e) => { e.preventDefault(); scrollTo('#contact') }}>
-                            Book Appointment
-                        </a>
-
-                        <button
-                            className="navbar-menu-btn"
-                            onClick={() => setMobileOpen(true)}
-                            aria-label="Open menu"
+                        <motion.div
+                            className="navbar-actions"
+                            animate={{ opacity: isAppLoading ? 0 : 1 }}
+                            transition={{ delay: 1, duration: 0.5 }}
                         >
-                            <Menu size={24} />
-                        </button>
+                            <button
+                                className="theme-toggle"
+                                onClick={toggleTheme}
+                                aria-label="Toggle theme"
+                            >
+                                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                            </button>
+
+                            <a href="#contact" className="navbar-cta desktop-only" onClick={(e) => { e.preventDefault(); scrollTo('#contact') }}>
+                                Book Appointment
+                            </a>
+
+                            <button
+                                className="navbar-menu-btn"
+                                onClick={() => setMobileOpen(true)}
+                                aria-label="Open menu"
+                            >
+                                <Menu size={24} />
+                            </button>
+                        </motion.div>
                     </div>
                 </div>
             </motion.nav>
