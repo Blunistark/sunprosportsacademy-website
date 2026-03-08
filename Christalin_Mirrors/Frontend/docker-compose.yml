@@ -5,7 +5,7 @@ services:
     build: .
     container_name: cm_hair_salon_frontend
     ports:
-      - "127.0.0.1:80:80"
+      - "127.0.0.1:8081:80"
     restart: always
     networks:
       - cm_network

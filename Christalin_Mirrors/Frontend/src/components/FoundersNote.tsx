@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { StaggerContainer, StaggerItem } from './Animations'
+import founderImg from '../assets/founder.jpeg'
 import './FoundersNote.css'
 
 export default function FoundersNote() {
@@ -68,9 +69,7 @@ export default function FoundersNote() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <div className="founders-note-image-placeholder">
-                                <span>Founder's Photo</span>
-                            </div>
+                            <img src={founderImg} alt="Sushmitha Cristalin A." className="founders-note-image" />
                         </motion.div>
                     </StaggerItem>
                 </StaggerContainer>

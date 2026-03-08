@@ -115,26 +115,14 @@
     align-items: center;
 }
 
-.founders-note-image-placeholder {
+.founders-note-image {
     width: 100%;
     max-width: 420px;
     aspect-ratio: 3/4;
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    object-fit: cover;
     border: 1px solid rgba(255, 255, 255, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.founders-note-image-placeholder span {
-    font-family: var(--font-heading);
-    font-size: var(--text-sm);
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* ─── Responsive ──────────────────────────────────────────────── */
@@ -148,7 +136,7 @@
         order: -1;
     }
 
-    .founders-note-image-placeholder {
+    .founders-note-image {
         max-width: 280px;
         aspect-ratio: 1;
         border-radius: 50%;
