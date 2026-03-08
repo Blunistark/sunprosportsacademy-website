@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sun, Moon, Menu, X } from 'lucide-react'
+import cmLogo from '../assets/cm-logo-white.png'
 import './Navbar.css'
 
 interface NavbarProps {
@@ -41,7 +42,7 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
             >
                 <div className="navbar-inner">
                     <a href="#" className="navbar-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-                        CM
+                        <img src={cmLogo} alt="CM" className="navbar-logo-img" />
                     </a>
 
                     <ul className="navbar-links">

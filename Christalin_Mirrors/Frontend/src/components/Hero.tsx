@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Instagram, ArrowDown } from 'lucide-react'
 import { StaggerContainer, StaggerItem } from './Animations'
 import heroImg from '../assets/hero.png'
+import cmLogo from '../assets/cm-logo-white.png'
 import nordicImg from '../assets/collection-nordic.png'
 import balayageImg from '../assets/collection-balayage.png'
 import editorialImg from '../assets/collection-editorial.png'
@@ -36,10 +37,8 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <h1 className="hero-title">
-                        Christalin<br />
-                        <span className="hero-title-accent">Mirrors</span>
-                    </h1>
+                    <img src={cmLogo} alt="CM" className="hero-monogram-img" />
+                    <h1 className="hero-brand-name">Christalin Mirrors</h1>
                     <p className="hero-tagline">
                         Refine &bull; Reflect &bull; Radiate
                     </p>
