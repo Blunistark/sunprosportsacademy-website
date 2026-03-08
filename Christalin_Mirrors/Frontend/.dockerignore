@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.gitignore
+.vscode
+.dockerignore
+Dockerfile
+nginx.conf
+npm-debug.log
+README.md
+task.md
+implementation_plan.md
+walkthrough.md
