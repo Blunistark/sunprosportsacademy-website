@@ -1,4 +1,4 @@
-import { MapPin, Clock, Phone, ExternalLink, Navigation } from 'lucide-react'
+import { MapPin, Clock, Phone, ExternalLink, Navigation, Globe } from 'lucide-react'
 import { StaggerContainer, StaggerItem } from './Animations'
 import './Branches.css'
 
@@ -7,9 +7,17 @@ const branches = [
         name: 'CM — Bengaluru',
         city: 'Bengaluru, Karnataka',
         address: 'Century Ethos Club House, Bellary Rd, Bengaluru 560092',
-        hours: 'Mon – Sat: 10:00 AM – 8:00 PM | Sun: 11:00 AM – 6:00 PM',
+        hours: 'Everyday: 10:00 AM – 9:00 PM',
         phone: '+91 72042 36981',
         mapUrl: 'https://maps.google.com/?q=Century+Ethos+Club+House+Bellary+Road+Bengaluru',
+    },
+    {
+        name: 'CM — Kalaburagi',
+        city: 'Kalaburagi, Karnataka',
+        address: 'Orchid Mall, Mahaveer Nagar, Khuba Plot, Brahmpur, Kalaburagi 585105',
+        hours: 'Everyday: 10:00 AM – 9:00 PM',
+        phone: '+91 XXXXX XXXXX', // TODO: Replace with actual phone number
+        mapUrl: 'https://maps.google.com/?q=Orchid+Mall+Kalaburagi',
     },
 ]
 
@@ -22,10 +30,10 @@ export default function Branches() {
                         <p className="section-label">Find Us</p>
                     </StaggerItem>
                     <StaggerItem>
-                        <h2 className="branches-heading">Our Location</h2>
+                        <h2 className="branches-heading">Our Locations</h2>
                     </StaggerItem>
                     <StaggerItem>
-                        <p className="branches-sub">Visit us at our studio in Bengaluru</p>
+                        <p className="branches-sub">Visit us at our studios across India</p>
                     </StaggerItem>
                 </StaggerContainer>
 
@@ -71,6 +79,31 @@ export default function Branches() {
                             </div>
                         </StaggerItem>
                     ))}
+
+                    {/* Dubai — Coming Soon */}
+                    <StaggerItem>
+                        <div className="branch-card branch-card-coming-soon">
+                            <div className="coming-soon-badge">
+                                <span className="coming-soon-pulse" />
+                                Opening Soon
+                            </div>
+                            <div className="branch-name">CM — Dubai</div>
+                            <div className="branch-city">Dubai, UAE</div>
+
+                            <div className="branch-detail">
+                                <Globe size={16} className="branch-detail-icon" />
+                                <span>Location to be announced</span>
+                            </div>
+                            <div className="branch-detail">
+                                <Clock size={16} className="branch-detail-icon" />
+                                <span>Coming Soon</span>
+                            </div>
+
+                            <div className="coming-soon-text">
+                                We're bringing the Christalin Mirrors experience to Dubai. Stay tuned for updates.
+                            </div>
+                        </div>
+                    </StaggerItem>
                 </StaggerContainer>
             </div>
         </section>

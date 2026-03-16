@@ -76,6 +76,11 @@
     color: var(--accent);
 }
 
+.footer-franchise-link {
+    color: var(--accent) !important;
+    font-weight: 400 !important;
+}
+
 /* ─── Newsletter ──────────────────────────────────────────────── */
 .footer-newsletter-desc {
     font-size: var(--text-sm);

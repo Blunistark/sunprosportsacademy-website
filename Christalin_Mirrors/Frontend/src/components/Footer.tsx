@@ -27,17 +27,28 @@ export default function Footer() {
                             <li><a href="#services" onClick={(e) => { e.preventDefault(); document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' }) }}>Services</a></li>
                             <li><a href="#gallery" onClick={(e) => { e.preventDefault(); document.querySelector('#gallery')?.scrollIntoView({ behavior: 'smooth' }) }}>Gallery</a></li>
                             <li><a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}>Contact</a></li>
+                            <li>
+                                <a
+                                    href="mailto:info@christalinmirrors.com?subject=Franchise%20Enquiry"
+                                    className="footer-franchise-link"
+                                >
+                                    Franchise Enquiry
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
-                    {/* Location */}
+                    {/* Locations */}
                     <div>
                         <h4 className="footer-col-title">Visit Us</h4>
                         <ul className="footer-col-list">
+                            <li><strong>Bengaluru</strong></li>
                             <li>Century Ethos Club House</li>
                             <li>Bellary Rd, Bengaluru 560092</li>
-                            <li style={{ marginTop: 8 }}>Mon — Sat: 10 AM — 8 PM</li>
-                            <li>Sun: 11 AM — 6 PM</li>
+                            <li style={{ marginTop: 12 }}><strong>Kalaburagi</strong></li>
+                            <li>Orchid Mall, Mahaveer Nagar</li>
+                            <li>Khuba Plot, Kalaburagi 585105</li>
+                            <li style={{ marginTop: 12 }}>Everyday: 10 AM — 9 PM</li>
                         </ul>
                     </div>
 
@@ -73,7 +84,8 @@ export default function Footer() {
                         <a href="tel:+917204236981" className="footer-social-link" aria-label="Phone">
                             <Phone size={18} />
                         </a>
-                        <a href="mailto:hello@christalinmirrors.com" className="footer-social-link" aria-label="Email">
+                        {/* TODO: Replace with actual official email */}
+                        <a href="mailto:info@christalinmirrors.com" className="footer-social-link" aria-label="Email">
                             <Mail size={18} />
                         </a>
                     </div>

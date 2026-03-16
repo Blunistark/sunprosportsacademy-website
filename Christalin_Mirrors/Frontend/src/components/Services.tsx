@@ -78,7 +78,7 @@ export default function Services() {
                     </StaggerItem>
                     <StaggerItem>
                         <p className="services-subtitle">
-                            From classic grooming to advanced Korean beauty rituals — every service is a curated experience.
+                            From classic grooming to advanced Korean beauty rituals — curated services for women and men.
                         </p>
                     </StaggerItem>
                 </StaggerContainer>

@@ -162,7 +162,7 @@
     letter-spacing: 0.5px;
 }
 
-.testimonial-since {
+.testimonial-source {
     font-size: var(--text-xs);
     color: var(--text-muted);
 }

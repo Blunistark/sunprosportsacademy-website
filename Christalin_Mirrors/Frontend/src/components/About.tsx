@@ -25,7 +25,7 @@ export default function About() {
                             <p className="section-label about-label">About Us</p>
                         </StaggerItem>
                         <StaggerItem>
-                            <h2 className="about-heading">About Christalin Mirrors</h2>
+                            <h2 className="about-heading">A Refined Unisex Salon</h2>
                         </StaggerItem>
                         <StaggerItem>
                             <p className="about-text">

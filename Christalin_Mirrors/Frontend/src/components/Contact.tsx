@@ -1,14 +1,27 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle, Send } from 'lucide-react'
+import { CheckCircle, Send, Calendar, Clock } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import contactImg from '../assets/contact-portrait.png'
 import './Contact.css'
+
+const timeSlots = [
+    '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM',
+    '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM',
+    '6:00 PM', '7:00 PM', '8:00 PM',
+]
 
 export default function Contact() {
     const formRef = useRef<HTMLFormElement>(null)
     const [sending, setSending] = useState(false)
     const [sent, setSent] = useState(false)
+
+    // Get tomorrow's date as minimum selectable date
+    const getMinDate = () => {
+        const tomorrow = new Date()
+        tomorrow.setDate(tomorrow.getDate() + 1)
+        return tomorrow.toISOString().split('T')[0]
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -17,10 +30,10 @@ export default function Contact() {
         setSending(true)
         try {
             await emailjs.sendForm(
-                'YOUR_SERVICE_ID',
-                'YOUR_TEMPLATE_ID',
+                'YOUR_SERVICE_ID',    // TODO: Replace with actual EmailJS Service ID
+                'YOUR_TEMPLATE_ID',   // TODO: Replace with actual EmailJS Template ID
                 formRef.current,
-                'YOUR_PUBLIC_KEY'
+                'YOUR_PUBLIC_KEY'     // TODO: Replace with actual EmailJS Public Key
             )
             setSent(true)
         } catch {
@@ -60,14 +73,14 @@ export default function Contact() {
                                 transition={{ duration: 0.5 }}
                             >
                                 <CheckCircle size={48} className="contact-success-icon" />
-                                <h3>Message Sent!</h3>
-                                <p>We'll get back to you within 24 hours.</p>
+                                <h3>Appointment Request Sent!</h3>
+                                <p>We'll confirm your booking within 24 hours.</p>
                             </motion.div>
                         ) : (
                             <>
                                 <h2 className="contact-heading">Book an Appointment</h2>
                                 <p className="contact-sub">
-                                    We'd love to hear from you. Fill out the form below and we'll be in touch.
+                                    Choose your preferred slot and we'll confirm your booking shortly.
                                 </p>
 
                                 <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
@@ -95,47 +108,51 @@ export default function Contact() {
                                         />
                                     </div>
 
-                                    <div className="form-group">
-                                        <label className="form-label" htmlFor="contact-phone">Phone</label>
-                                        <input
-                                            id="contact-phone"
-                                            name="user_phone"
-                                            type="tel"
-                                            className="form-input"
-                                            placeholder="+91 72042 36981"
-                                        />
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <label className="form-label" htmlFor="contact-date">
+                                                <Calendar size={14} style={{ marginRight: 6, display: 'inline', verticalAlign: 'middle' }} />
+                                                Preferred Date
+                                            </label>
+                                            <input
+                                                id="contact-date"
+                                                name="preferred_date"
+                                                type="date"
+                                                className="form-input"
+                                                min={getMinDate()}
+                                                required
+                                            />
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="form-label" htmlFor="contact-time">
+                                                <Clock size={14} style={{ marginRight: 6, display: 'inline', verticalAlign: 'middle' }} />
+                                                Preferred Time
+                                            </label>
+                                            <select
+                                                id="contact-time"
+                                                name="preferred_time"
+                                                className="form-select"
+                                                defaultValue=""
+                                                required
+                                            >
+                                                <option value="" disabled>Select a time slot</option>
+                                                {timeSlots.map(slot => (
+                                                    <option key={slot} value={slot}>{slot}</option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div className="form-group">
-                                        <label className="form-label" htmlFor="contact-service">Service Interest</label>
-                                        <select
-                                            id="contact-service"
-                                            name="service_interest"
-                                            className="form-select"
-                                            defaultValue=""
-                                        >
-                                            <option value="" disabled>Select a service</option>
-                                            <option value="haircut">Haircut & Styling</option>
-                                            <option value="haircare">Hair Care & Spa</option>
-                                            <option value="korean">Korean Head Spa Rituals</option>
-                                            <option value="color">Hair Colour & Highlights</option>
-                                            <option value="treatment">Hair Treatments (Keratin/Smoothing)</option>
-                                            <option value="skincare">Skincare & Facials</option>
-                                            <option value="bridal">Bridal & Party Makeup</option>
-                                            <option value="nails">Nails & Extensions</option>
-                                            <option value="mens">Men's Grooming</option>
-                                            <option value="massage">Wellness Massage</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label className="form-label" htmlFor="contact-message">Message</label>
+                                        <label className="form-label" htmlFor="contact-note">
+                                            Add a Note <span className="form-optional">(optional)</span>
+                                        </label>
                                         <textarea
-                                            id="contact-message"
-                                            name="message"
+                                            id="contact-note"
+                                            name="note"
                                             className="form-textarea"
-                                            placeholder="Tell us what you're looking for..."
+                                            placeholder="Any special requests or preferences..."
                                             rows={3}
                                         />
                                     </div>
@@ -147,7 +164,7 @@ export default function Contact() {
                                     >
                                         {sending ? 'Sending...' : (
                                             <>
-                                                Send Message
+                                                Book Appointment
                                                 <Send size={16} style={{ marginLeft: 8, display: 'inline' }} />
                                             </>
                                         )}
