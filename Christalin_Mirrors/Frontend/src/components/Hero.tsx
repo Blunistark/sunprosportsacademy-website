@@ -5,7 +5,7 @@ import heroImg from '../assets/branch-kalaburagi.png'
 import cmLogo from '../assets/cm-logo-white.png'
 import './Hero.css'
 
-export default function Hero() {
+export default function Hero({ isAppLoading }: { isAppLoading?: boolean }) {
     const [scrolled, setScrolled] = useState(false)
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-                {!scrolled ? (
+                {!scrolled && !isAppLoading ? (
                     <motion.img 
                         layoutId="main-logo"
                         src={cmLogo} 

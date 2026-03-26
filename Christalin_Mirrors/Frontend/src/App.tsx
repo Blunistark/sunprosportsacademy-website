@@ -65,7 +65,7 @@ function LandingPage() {
 
             <Navbar theme={theme} toggleTheme={toggleTheme} isAppLoading={isLoading} />
             <main>
-                <Hero />
+                <Hero isAppLoading={isLoading} />
                 <About />
                 <FoundersNote />
                 <Services />
