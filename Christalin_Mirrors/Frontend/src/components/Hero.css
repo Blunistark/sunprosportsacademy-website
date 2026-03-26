@@ -73,7 +73,7 @@
 
 /* ─── Brand Name ─────────────────────────────────────────────── */
 .hero-brand-name {
-    font-family: var(--font-heading);
+    font-family: 'Colabero', var(--font-heading);
     font-size: clamp(28px, 5vw, 56px);
     font-weight: 700;
     letter-spacing: 0.18em;
