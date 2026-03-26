@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import heroImg from '../assets/branch-kalaburagi.png'
@@ -5,6 +6,15 @@ import cmLogo from '../assets/cm-logo-white.png'
 import './Hero.css'
 
 export default function Hero() {
+    const [scrolled, setScrolled] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 50)
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        handleScroll()
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
     return (
         <section className="hero" id="hero">
             <div className="hero-image-wrapper">
@@ -25,7 +35,17 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-                <img src={cmLogo} alt="CM" className="hero-monogram-img" />
+                {!scrolled ? (
+                    <motion.img 
+                        layoutId="main-logo"
+                        src={cmLogo} 
+                        alt="CM" 
+                        className="hero-monogram-img" 
+                        transition={{ type: "spring", stiffness: 70, damping: 24, mass: 1.2 }}
+                    />
+                ) : (
+                    <div className="hero-monogram-img" style={{ visibility: 'hidden' }} />
+                )}
                 <span className="hero-unisex-badge">Unisex Salon</span>
                 <h1 className="hero-brand-name">Christalin Mirrors</h1>
                 <p className="hero-tagline">

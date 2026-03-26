@@ -63,7 +63,7 @@ export default function Navbar({ theme, toggleTheme, isAppLoading }: NavbarProps
 
                     {/* Centered Logo Container */}
                     <div className="navbar-logo-container">
-                        {!isAppLoading && (
+                        {!isAppLoading && scrolled && (
                             <motion.a
                                 href="#"
                                 className="navbar-logo"

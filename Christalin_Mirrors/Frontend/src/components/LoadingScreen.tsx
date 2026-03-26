@@ -15,7 +15,7 @@ export default function LoadingScreen() {
                 className="loading-logo-container"
                 layoutId="main-logo"
                 initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
+                animate={{ scale: 1.25, opacity: 1 }}
                 transition={{
                     type: "spring",
                     stiffness: 70,
