@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
-import heroImg from '../assets/hero.png'
+import heroImg from '../assets/branch-kalaburagi.png'
 import cmLogo from '../assets/cm-logo-white.png'
 import './Hero.css'
 
