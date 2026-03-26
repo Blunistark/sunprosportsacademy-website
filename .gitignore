@@ -55,3 +55,9 @@ Video ref/
 *.tgz
 .cache/
 .parcel-cache/
+
+# Agent and AI folders
+.agents/
+.gemini/
+skills/
+
