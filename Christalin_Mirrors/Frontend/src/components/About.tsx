@@ -9,15 +9,9 @@ export default function About() {
             <div className="container">
                 <div className="about-inner">
                     {/* Image */}
-                    <motion.div
-                        className="about-image-wrapper"
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    >
+                    <StaggerItem className="about-image-wrapper" xOffset={-40} yOffset={0}>
                         <img src={aboutImg} alt="Christalin Mirrors Salon" className="about-image" loading="lazy" />
-                    </motion.div>
+                    </StaggerItem>
 
                     {/* Text */}
                     <StaggerContainer>

@@ -61,16 +61,8 @@ export default function FoundersNote() {
                     </StaggerItem>
 
                     {/* Image Side */}
-                    <StaggerItem>
-                        <motion.div
-                            className="founders-note-image-side"
-                            initial={{ opacity: 0, x: 40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            <img src={founderImg} alt="Sushmitha Cristalin A." className="founders-note-image" />
-                        </motion.div>
+                    <StaggerItem className="founders-note-image-side" xOffset={40} yOffset={0}>
+                        <img src={founderImg} alt="Sushmitha Cristalin A." className="founders-note-image" />
                     </StaggerItem>
                 </StaggerContainer>
             </div>

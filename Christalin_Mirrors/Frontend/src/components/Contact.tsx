@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, Send, Calendar, Clock } from 'lucide-react'
 import emailjs from '@emailjs/browser'
+import { StaggerItem } from './Animations'
 import contactImg from '../assets/contact-portrait.png' // TODO: Replace with actual staff photo
 import './Contact.css'
 
@@ -46,13 +47,7 @@ export default function Contact() {
     return (
         <section className="contact section" id="contact">
             <div className="container">
-                <motion.div
-                    className="contact-split"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
+                <StaggerItem className="contact-split">
                     {/* Image Side */}
                     <div className="contact-image-side">
                         <img src={contactImg} alt="Christalin Mirrors Salon" loading="lazy" />
@@ -173,7 +168,7 @@ export default function Contact() {
                             </>
                         )}
                     </div>
-                </motion.div>
+                </StaggerItem>
             </div>
         </section>
     )

@@ -143,13 +143,7 @@ export default function Services() {
                 </StaggerContainer>
 
                 {/* Featured Services — Horizontal Scroll Cards */}
-                <motion.div
-                    className="featured-scroll-wrapper"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                >
+                <StaggerItem className="featured-scroll-wrapper">
                     <div className="featured-scroll-header">
                         <span className="featured-scroll-label">✦ Featured</span>
                     </div>
@@ -177,7 +171,7 @@ export default function Services() {
                         ))}
                     </div>
                     </div>
-                </motion.div>
+                </StaggerItem>
 
                 <div className="services-tabs">
                     {tabs.map(tab => (

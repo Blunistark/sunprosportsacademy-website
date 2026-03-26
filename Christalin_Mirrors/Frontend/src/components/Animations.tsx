@@ -66,48 +66,44 @@ export function Parallax({ children, speed = 0.3, className }: ParallaxProps) {
 export function StaggerContainer({
     children,
     className,
-    stagger = 0.08,
 }: {
     children: React.ReactNode
     className?: string
     stagger?: number
 }) {
     return (
-        <motion.div
-            className={className}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            variants={{
-                visible: {
-                    transition: { staggerChildren: stagger },
-                },
-            }}
-        >
+        <div className={className}>
             {children}
-        </motion.div>
+        </div>
     )
 }
 
 export function StaggerItem({
     children,
     className,
+    yOffset = 40,
+    xOffset = 0
 }: {
     children: React.ReactNode
     className?: string
+    yOffset?: number
+    xOffset?: number
 }) {
+    const ref = useRef<HTMLDivElement>(null)
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start 95%", "end 5%"]
+    })
+    
+    // Smoothly fade in/out and translate in/out based on viewport crossing
+    const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0])
+    const y = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [yOffset, 0, 0, -yOffset])
+    const x = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [xOffset, 0, 0, -xOffset])
+
+    const style = xOffset !== 0 ? { opacity, y, x } : { opacity, y }
+
     return (
-        <motion.div
-            className={className}
-            variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-                },
-            }}
-        >
+        <motion.div ref={ref} className={className} style={style}>
             {children}
         </motion.div>
     )
