@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react'
 import { Save, RotateCcw } from 'lucide-react'
 import { settingsStore, resetStore } from '../data/store'
 import type { SalonSettings } from '../data/types'
+import { useToast } from '../components/Toast'
 import '../AdminShared.css'
 
 export default function SettingsPage() {
+    const { showToast } = useToast()
     const [settings, setSettings] = useState<SalonSettings>(settingsStore.get())
-    const [saved, setSaved] = useState(false)
 
     useEffect(() => { setSettings(settingsStore.get()) }, [])
 
     const handleSave = () => {
         settingsStore.update(settings)
-        setSaved(true)
-        setTimeout(() => setSaved(false), 2000)
+        showToast('success', 'Settings saved successfully')
     }
 
     const handleReset = () => {
@@ -39,7 +39,7 @@ export default function SettingsPage() {
                 <div style={{ display: 'flex', gap: 10 }}>
                     <button className="admin-btn admin-btn-primary" onClick={handleSave}>
                         <Save size={14} />
-                        {saved ? 'Saved ✓' : 'Save Changes'}
+                        Save Changes
                     </button>
                 </div>
             </div>
@@ -71,9 +71,9 @@ export default function SettingsPage() {
             <div className="admin-form-card">
                 <h3>Branches</h3>
                 {settings.branches.map((branch, idx) => (
-                    <div key={idx} style={{ marginBottom: 28, paddingBottom: 20, borderBottom: idx < settings.branches.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
+                    <div key={idx} style={{ marginBottom: 28, paddingBottom: 20, borderBottom: idx < settings.branches.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-                            <span style={{ fontSize: 14, fontWeight: 500, color: '#C17F59' }}>{branch.name}</span>
+                            <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--accent)' }}>{branch.name}</span>
                             <span className={`status-badge ${branch.isActive ? 'confirmed' : 'cancelled'}`} style={{ cursor: 'pointer' }}
                                   onClick={() => updateBranch(idx, 'isActive', !branch.isActive)}>
                                 {branch.isActive ? 'Active' : 'Inactive'}
@@ -122,8 +122,8 @@ export default function SettingsPage() {
 
             {/* Danger Zone */}
             <div className="admin-form-card" style={{ borderColor: 'rgba(232, 93, 93, 0.2)' }}>
-                <h3 style={{ color: '#E85D5D' }}>Danger Zone</h3>
-                <p style={{ fontSize: 13, color: '#666', marginBottom: 16 }}>
+                <h3 style={{ color: 'var(--danger)' }}>Danger Zone</h3>
+                <p style={{ fontSize: 13, color: 'var(--text-dim)', marginBottom: 16 }}>
                     Reset all admin data to mock defaults. This will clear all appointments, clients, services, and staff.
                 </p>
                 <button className="admin-btn admin-btn-danger" onClick={handleReset}>

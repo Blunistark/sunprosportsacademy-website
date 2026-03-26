@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Clock } from 'lucide-react'
 import { appointmentStore } from '../data/store'
 import type { Appointment } from '../data/types'
 import '../AdminShared.css'
+import './Calendar.css'
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -50,7 +51,7 @@ export default function Calendar() {
                 <p className="admin-page-sub">Monthly view of appointments</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 24 }}>
+            <div className="calendar-layout">
                 {/* Calendar Grid */}
                 <div className="admin-form-card" style={{ marginBottom: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
@@ -62,16 +63,16 @@ export default function Calendar() {
                     </div>
 
                     {/* Day Headers */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2, marginBottom: 4 }}>
+                    <div className="calendar-day-headers">
                         {DAYS.map(d => (
-                            <div key={d} style={{ textAlign: 'center', fontSize: 10, fontWeight: 500, letterSpacing: 1, textTransform: 'uppercase', color: '#666', padding: '8px 0' }}>
+                            <div key={d} className="calendar-day-header">
                                 {d}
                             </div>
                         ))}
                     </div>
 
                     {/* Date Cells */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2 }}>
+                    <div className="calendar-grid">
                         {calendarDays.map((day, i) => {
                             if (day === null) return <div key={`e-${i}`} />
                             const dateStr = getDateStr(day)
@@ -85,23 +86,15 @@ export default function Calendar() {
                                 <div
                                     key={day}
                                     onClick={() => setSelectedDate(dateStr)}
-                                    style={{
-                                        padding: '8px 6px',
-                                        borderRadius: 8,
-                                        cursor: 'pointer',
-                                        minHeight: 66,
-                                        background: isSelected ? 'rgba(193,127,89,0.12)' : isToday ? 'rgba(255,255,255,0.04)' : 'transparent',
-                                        border: isSelected ? '1px solid rgba(193,127,89,0.3)' : isToday ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
-                                        transition: 'all 0.15s',
-                                    }}
+                                    className={`calendar-cell${isToday ? ' is-today' : ''}${isSelected ? ' is-selected' : ''}`}
                                 >
-                                    <div style={{ fontSize: 12, fontWeight: isToday ? 700 : 400, color: isToday ? '#C17F59' : '#CCC', marginBottom: 4 }}>
+                                    <div className="calendar-day-number">
                                         {day}
                                     </div>
                                     {dayApts.length > 0 && (
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                            {confirmed > 0 && <div style={{ fontSize: 9, padding: '1px 4px', borderRadius: 3, background: 'rgba(74,222,128,0.15)', color: '#4ADE80' }}>{confirmed} confirmed</div>}
-                                            {pending > 0 && <div style={{ fontSize: 9, padding: '1px 4px', borderRadius: 3, background: 'rgba(251,191,36,0.15)', color: '#FBBF24' }}>{pending} pending</div>}
+                                            {confirmed > 0 && <div className="calendar-apt-tag confirmed">{confirmed} confirmed</div>}
+                                            {pending > 0 && <div className="calendar-apt-tag pending">{pending} pending</div>}
                                         </div>
                                     )}
                                 </div>
@@ -130,22 +123,19 @@ export default function Calendar() {
                     ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                             {selectedApts.map(apt => (
-                                <div key={apt.id} style={{
-                                    padding: '12px 14px',
-                                    borderRadius: 8,
-                                    background: 'rgba(255,255,255,0.03)',
-                                    borderLeft: `3px solid ${apt.status === 'confirmed' ? '#4ADE80' : apt.status === 'pending' ? '#FBBF24' : apt.status === 'completed' ? '#60A5FA' : '#E85D5D'}`,
+                                <div key={apt.id} className="calendar-apt-card" style={{
+                                    borderLeft: `3px solid ${apt.status === 'confirmed' ? 'var(--success-light)' : apt.status === 'pending' ? 'var(--warning-light)' : apt.status === 'completed' ? 'var(--info)' : 'var(--danger)'}`,
                                 }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                                        <span style={{ fontWeight: 500, color: '#E8E8E8', fontSize: 13 }}>{apt.clientName}</span>
+                                        <span style={{ fontWeight: 500, color: 'var(--text-primary)', fontSize: 13 }}>{apt.clientName}</span>
                                         <span className={`status-badge ${apt.status}`}>{apt.status}</span>
                                     </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#888' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--text-muted)' }}>
                                         <Clock size={11} /> {apt.time}
                                     </div>
-                                    <div style={{ fontSize: 12, color: '#CCC', marginTop: 4 }}>{apt.service}</div>
-                                    {apt.stylist && <div style={{ fontSize: 11, color: '#666', marginTop: 2 }}>with {apt.stylist}</div>}
-                                    {apt.notes && <div style={{ fontSize: 11, color: '#888', marginTop: 4, fontStyle: 'italic' }}>📝 {apt.notes}</div>}
+                                    <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 4 }}>{apt.service}</div>
+                                    {apt.stylist && <div style={{ fontSize: 11, color: 'var(--text-dim)', marginTop: 2 }}>with {apt.stylist}</div>}
+                                    {apt.notes && <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4, fontStyle: 'italic' }}>📝 {apt.notes}</div>}
                                 </div>
                             ))}
                         </div>

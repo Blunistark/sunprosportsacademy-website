@@ -4,6 +4,9 @@
 
 export interface Appointment {
     id: string
+    clientId: string      // linked client ID (Fix 7 / Task 1)
+    staffId: string       // linked staff ID (Task 1)
+    serviceId: string     // linked service ID (Task 1)
     clientName: string
     clientEmail: string
     clientPhone?: string
@@ -127,6 +130,7 @@ export interface Invoice {
     stylist?: string
     notes?: string
     createdAt: string
+    appointmentId?: string  // linked appointment (Fix 2)
 }
 
 export interface InvoiceItem {
@@ -135,6 +139,7 @@ export interface InvoiceItem {
     quantity: number
     unitPrice: number
     total: number
+    productId?: string    // linked inventory item ID for stock decrement
 }
 
 // ─── Inventory (Products) ───────────────────────────────────

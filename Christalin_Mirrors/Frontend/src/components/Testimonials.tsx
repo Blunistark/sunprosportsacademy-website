@@ -29,14 +29,14 @@ const reviews = [
 ]
 
 const marqueeItems = [
-    { text: 'REAL RESULTS', type: 'large' as const },
-    { text: 'no filters', type: 'accent' as const },
-    { text: 'NO RETOUCHING', type: 'outline' as const },
-    { text: 'just real people', type: 'accent' as const },
-    { text: 'REAL RESULTS', type: 'large' as const },
-    { text: 'no filters', type: 'accent' as const },
-    { text: 'NO RETOUCHING', type: 'outline' as const },
-    { text: 'just real people', type: 'accent' as const },
+    { text: 'KOREAN HEAD SPA', type: 'large' as const },
+    { text: 'unisex salon', type: 'accent' as const },
+    { text: 'BRIDAL MAKEOVER', type: 'outline' as const },
+    { text: 'glass skin facial', type: 'accent' as const },
+    { text: 'BALAYAGE & COLOR', type: 'large' as const },
+    { text: 'premium grooming', type: 'accent' as const },
+    { text: 'KERATIN TREATMENT', type: 'outline' as const },
+    { text: 'nail art & extensions', type: 'accent' as const },
 ]
 
 export default function Testimonials() {

@@ -269,6 +269,9 @@ export const invoiceStore = {
 export const inventoryStore = {
     getAll: (): InventoryItem[] => getAll(KEYS.INVENTORY),
 
+    getById: (id: string): InventoryItem | undefined =>
+        getAll<InventoryItem>(KEYS.INVENTORY).find(i => i.id === id),
+
     create: (item: Omit<InventoryItem, 'id'>): InventoryItem => {
         const all = getAll<InventoryItem>(KEYS.INVENTORY)
         const newItem: InventoryItem = { ...item, id: `itm-${generateId()}` }

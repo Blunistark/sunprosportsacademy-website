@@ -11,6 +11,23 @@ const emptyForm: Omit<Client, 'id'> = {
     totalVisits: 0, tags: [], notes: '',
 }
 
+const getInitial = (name: string) => name ? name.charAt(0).toUpperCase() : '?';
+const getAvatarColor = (name: string) => {
+    const colors = ['#f43f5e', '#8b5cf6', '#3b82f6', 'var(--success)', 'var(--warning)'];
+    if (!name) return colors[0];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    return colors[Math.abs(hash) % colors.length];
+};
+
+const getTagStyle = (tag: string) => {
+    const lower = tag.toLowerCase();
+    if (lower === 'vip') return { background: 'var(--accent-alt)', color: 'var(--bg-card)', fontWeight: 600 };
+    if (lower === 'new') return { background: 'rgba(59,130,246,0.15)', color: '#3b82f6' };
+    if (lower === 'bridal') return { background: 'rgba(244,63,94,0.15)', color: '#f43f5e' };
+    return { background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)' };
+};
+
 export default function Clients() {
     const navigate = useNavigate()
     const [clients, setClients] = useState<Client[]>([])
@@ -181,15 +198,22 @@ export default function Clients() {
                         ) : filtered.map(client => (
                             <tr key={client.id}>
                                 <td>
-                                    <div style={{ fontWeight: 500, color: '#C17F59', cursor: 'pointer' }} onClick={() => navigate(`/admin/clients/${client.id}`)}>{client.name}</div>
-                                    <div style={{ fontSize: 11, color: '#666' }}>{client.email}</div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                        <div style={{ width: 36, height: 36, borderRadius: '50%', background: getAvatarColor(client.name), color: 'var(--text-bright)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 16 }}>
+                                            {getInitial(client.name)}
+                                        </div>
+                                        <div>
+                                            <div className="cell-primary" style={{ cursor: 'pointer' }} onClick={() => navigate(`/admin/clients/${client.id}`)}>{client.name}</div>
+                                            <div className="cell-secondary">{client.email}</div>
+                                        </div>
+                                    </div>
                                 </td>
-                                <td>{client.phone}</td>
-                                <td style={{ textTransform: 'capitalize' }}>{client.gender}</td>
-                                <td>{client.branch}</td>
-                                <td style={{ fontWeight: 600, color: '#C17F59' }}>{client.totalVisits}</td>
-                                <td>{client.lastVisit ? new Date(client.lastVisit + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : '—'}</td>
-                                <td>{client.tags.map(t => <span key={t} className="admin-tag">{t}</span>)}</td>
+                                <td className="cell-primary" style={{ fontSize: 13 }}>{client.phone}</td>
+                                <td style={{ textTransform: 'capitalize' }} className="cell-secondary">{client.gender}</td>
+                                <td className="cell-secondary">{client.branch}</td>
+                                <td style={{ fontWeight: 700, fontSize: 18, color: 'var(--text-primary)' }}>{client.totalVisits}</td>
+                                <td className="cell-secondary">{client.lastVisit ? new Date(client.lastVisit + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : '—'}</td>
+                                <td>{client.tags.map(t => <span key={t} className="admin-tag" style={getTagStyle(t)}>{t}</span>)}</td>
                                 <td>
                                     <div className="admin-actions">
                                         <button className="admin-btn admin-btn-ghost admin-btn-sm" onClick={() => navigate(`/admin/clients/${client.id}`)}><Eye size={14} /></button>

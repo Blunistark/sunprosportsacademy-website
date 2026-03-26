@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, Send, Calendar, Clock } from 'lucide-react'
 import emailjs from '@emailjs/browser'
-import contactImg from '../assets/contact-portrait.png'
+import contactImg from '../assets/contact-portrait.png' // TODO: Replace with actual staff photo
 import './Contact.css'
 
 const timeSlots = [

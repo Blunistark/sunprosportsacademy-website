@@ -62,20 +62,20 @@ export default function ClientDetail() {
                 <div className="admin-form-card" style={{ margin: 0 }}>
                     <h3 style={{ marginBottom: 16, fontSize: 14 }}>Profile</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#CCC' }}>
-                            <Mail size={14} style={{ color: '#888' }} /> {client.email}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
+                            <Mail size={14} style={{ color: 'var(--text-muted)' }} /> {client.email}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#CCC' }}>
-                            <Phone size={14} style={{ color: '#888' }} /> {client.phone}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
+                            <Phone size={14} style={{ color: 'var(--text-muted)' }} /> {client.phone}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#CCC' }}>
-                            <MapPin size={14} style={{ color: '#888' }} /> {client.branch}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
+                            <MapPin size={14} style={{ color: 'var(--text-muted)' }} /> {client.branch}
                         </div>
-                        <div style={{ fontSize: 12, color: '#666', textTransform: 'capitalize' }}>
+                        <div style={{ fontSize: 12, color: 'var(--text-dim)', textTransform: 'capitalize' }}>
                             Gender: {client.gender} &nbsp;|&nbsp; Preferred Stylist: {client.preferredStylist || '—'}
                         </div>
                         {client.notes && (
-                            <div style={{ fontSize: 12, color: '#888', marginTop: 4, padding: '8px 12px', background: 'rgba(255,255,255,0.03)', borderRadius: 6 }}>
+                            <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4, padding: '8px 12px', background: 'var(--bg-card-alt)', borderRadius: 6 }}>
                                 📝 {client.notes}
                             </div>
                         )}
@@ -137,20 +137,20 @@ export default function ClientDetail() {
                                     <td>
                                         {v.services.map((s, i) => (
                                             <div key={i} style={{ fontSize: 12 }}>
-                                                <span style={{ color: '#E8E8E8' }}>{s.name}</span>
-                                                <span style={{ color: '#666', marginLeft: 6 }}>₹{s.price.toLocaleString()}</span>
+                                                <span style={{ color: 'var(--text-primary)' }}>{s.name}</span>
+                                                <span style={{ color: 'var(--text-dim)', marginLeft: 6 }}>₹{s.price.toLocaleString()}</span>
                                             </div>
                                         ))}
                                     </td>
                                     <td>{v.stylist}</td>
                                     <td>
-                                        <div style={{ fontWeight: 600, color: '#C17F59' }}>₹{v.total.toLocaleString()}</div>
-                                        {v.discount > 0 && <div style={{ fontSize: 10, color: '#4ADE80' }}>-₹{v.discount} discount</div>}
+                                        <div style={{ fontWeight: 600, color: 'var(--accent)' }}>₹{v.total.toLocaleString()}</div>
+                                        {v.discount > 0 && <div style={{ fontSize: 10, color: 'var(--success-light)' }}>-₹{v.discount} discount</div>}
                                     </td>
                                     <td style={{ textTransform: 'uppercase', fontSize: 11, letterSpacing: 1 }}>{v.paymentMethod}</td>
                                     <td>
                                         {v.rating ? (
-                                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: '#FBBF24' }}>
+                                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: 'var(--warning-light)' }}>
                                                 <Star size={12} fill="#FBBF24" /> {v.rating}/5
                                             </span>
                                         ) : '—'}
@@ -174,11 +174,11 @@ export default function ClientDetail() {
                                 <tr><td colSpan={7}><div className="admin-empty" style={{ padding: 32 }}><h3>No invoices</h3></div></td></tr>
                             ) : invoices.map(inv => (
                                 <tr key={inv.id} style={{ cursor: 'pointer' }} onClick={() => navigate(`/admin/invoices/${inv.id}`)}>
-                                    <td style={{ fontWeight: 500, color: '#C17F59' }}>{inv.invoiceNumber}</td>
+                                    <td style={{ fontWeight: 500, color: 'var(--accent)' }}>{inv.invoiceNumber}</td>
                                     <td>{new Date(inv.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                                     <td>{inv.items.map(i => i.service).join(', ')}</td>
                                     <td>₹{inv.subtotal.toLocaleString()}</td>
-                                    <td style={{ fontSize: 12, color: '#888' }}>₹{inv.taxAmount.toLocaleString()}</td>
+                                    <td style={{ fontSize: 12, color: 'var(--text-muted)' }}>₹{inv.taxAmount.toLocaleString()}</td>
                                     <td style={{ fontWeight: 600 }}>₹{inv.total.toLocaleString()}</td>
                                     <td><span className={`status-badge ${inv.status === 'paid' ? 'confirmed' : inv.status === 'sent' ? 'pending' : inv.status}`}>{inv.status}</span></td>
                                 </tr>

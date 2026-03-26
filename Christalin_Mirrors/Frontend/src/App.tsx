@@ -13,6 +13,7 @@ import Branches from './components/Branches'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Admin
 import { initializeStore } from './admin/data/store'
@@ -24,12 +25,26 @@ import ClientDetail from './admin/pages/ClientDetail'
 import AdminServices from './admin/pages/Services'
 import Staff from './admin/pages/Staff'
 import Settings from './admin/pages/Settings'
+import Billing from './admin/pages/Billing'
 import { InvoiceList, InvoiceDetail } from './admin/pages/Invoices'
 import Inventory from './admin/pages/Inventory'
 import Calendar from './admin/pages/Calendar'
+import Login from './admin/pages/Login'
+import ProtectedRoute from './admin/components/ProtectedRoute'
 
 // Initialize admin store with mock data on first load
 initializeStore()
+
+// Run: npm install @tanstack/react-query
+// Pages will be migrated to useQuery hooks when backend is connected
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
+    },
+  },
+})
 
 function LandingPage() {
     const { theme, toggleTheme } = useTheme()
@@ -68,8 +83,16 @@ export default function App() {
     return (
         <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/admin" element={<AdminLayout />}>
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin" element={
+                <QueryClientProvider client={queryClient}>
+                    <ProtectedRoute>
+                        <AdminLayout />
+                    </ProtectedRoute>
+                </QueryClientProvider>
+            }>
                 <Route index element={<Dashboard />} />
+                <Route path="billing" element={<Billing />} />
                 <Route path="calendar" element={<Calendar />} />
                 <Route path="appointments" element={<Appointments />} />
                 <Route path="clients" element={<Clients />} />

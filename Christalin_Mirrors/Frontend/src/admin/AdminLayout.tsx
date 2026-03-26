@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import {
     LayoutDashboard, Calendar, Users, Scissors,
     UserCog, Settings, Menu, X, ArrowLeft, LogOut,
-    FileText, Package, CalendarDays
+    FileText, Package, CalendarDays, Receipt,
+    Sun, Moon
 } from 'lucide-react'
+import { ToastProvider } from './components/Toast'
 import './AdminLayout.css'
 
 const navItems = [
     { label: 'Dashboard', icon: LayoutDashboard, path: '/admin' },
+    { label: 'Billing', icon: Receipt, path: '/admin/billing' },
     { label: 'Calendar', icon: CalendarDays, path: '/admin/calendar' },
     { label: 'Appointments', icon: Calendar, path: '/admin/appointments' },
     { label: 'Clients', icon: Users, path: '/admin/clients' },
@@ -21,7 +24,19 @@ const navItems = [
 
 export default function AdminLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+        return (localStorage.getItem('adminTheme') as 'dark' | 'light') || 'dark'
+    })
     const navigate = useNavigate()
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme)
+        localStorage.setItem('adminTheme', theme)
+    }, [theme])
+
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+    }
 
     return (
         <div className="admin-layout">
@@ -57,7 +72,7 @@ export default function AdminLayout() {
                         <ArrowLeft size={18} />
                         <span>Back to Website</span>
                     </button>
-                    <button className="admin-nav-link logout">
+                    <button className="admin-nav-link logout" onClick={() => navigate('/')}>
                         <LogOut size={18} />
                         <span>Logout</span>
                     </button>
@@ -75,13 +90,22 @@ export default function AdminLayout() {
                     </button>
                     <div className="admin-topbar-title">Christalin Mirrors</div>
                     <div className="admin-topbar-user">
+                        <button 
+                            onClick={toggleTheme} 
+                            className="admin-btn admin-btn-ghost" 
+                            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+                        >
+                            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                        </button>
                         <div className="admin-avatar">SC</div>
                     </div>
                 </header>
 
+                <ToastProvider>
                 <div className="admin-content">
                     <Outlet />
                 </div>
+                </ToastProvider>
             </main>
         </div>
     )

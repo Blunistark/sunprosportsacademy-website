@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Calendar, Users, TrendingUp, Clock, AlertTriangle, Package, FileText, ChevronRight } from 'lucide-react'
+import { Calendar, Users, TrendingUp, Clock, AlertTriangle, Package, FileText } from 'lucide-react'
 import { appointmentStore, clientStore, invoiceStore, inventoryStore, visitStore } from '../data/store'
 import type { Appointment, Invoice } from '../data/types'
 import '../AdminShared.css'
+import './Dashboard.css'
 
 export default function Dashboard() {
     const navigate = useNavigate()
@@ -43,22 +44,22 @@ export default function Dashboard() {
 
             {/* Stats */}
             <div className="admin-stats-grid">
-                <div className="admin-stat-card" onClick={() => navigate('/admin/appointments')} style={{ cursor: 'pointer' }}>
+                <div className="admin-stat-card" onClick={() => navigate('/admin/appointments')} style={{ cursor: 'pointer', borderTop: '4px solid var(--border-strong)' }}>
                     <div className="stat-icon"><Calendar size={20} /></div>
                     <div className="stat-label">Today's Appointments</div>
                     <div className="stat-value accent">{todayApts.length}</div>
                 </div>
-                <div className="admin-stat-card" onClick={() => navigate('/admin/appointments')} style={{ cursor: 'pointer' }}>
+                <div className="admin-stat-card" onClick={() => navigate('/admin/appointments')} style={{ cursor: 'pointer', borderTop: '4px solid var(--warning)' }}>
                     <div className="stat-icon"><Clock size={20} /></div>
                     <div className="stat-label">Pending Requests</div>
-                    <div className="stat-value" style={{ color: pendingApts.length > 0 ? '#FBBF24' : '#4ADE80' }}>{pendingApts.length}</div>
+                    <div className="stat-value" style={{ color: pendingApts.length > 0 ? 'var(--warning-light)' : 'var(--success-light)' }}>{pendingApts.length}</div>
                 </div>
-                <div className="admin-stat-card" onClick={() => navigate('/admin/clients')} style={{ cursor: 'pointer' }}>
+                <div className="admin-stat-card" onClick={() => navigate('/admin/clients')} style={{ cursor: 'pointer', borderTop: '4px solid var(--success)' }}>
                     <div className="stat-icon"><Users size={20} /></div>
                     <div className="stat-label">Total Clients</div>
                     <div className="stat-value green">{clients.length}</div>
                 </div>
-                <div className="admin-stat-card" onClick={() => navigate('/admin/invoices')} style={{ cursor: 'pointer' }}>
+                <div className="admin-stat-card" onClick={() => navigate('/admin/invoices')} style={{ cursor: 'pointer', borderTop: '4px solid var(--accent-alt)' }}>
                     <div className="stat-icon"><TrendingUp size={20} /></div>
                     <div className="stat-label">This Month Revenue</div>
                     <div className="stat-value accent">₹{monthRevenue.toLocaleString()}</div>
@@ -67,29 +68,29 @@ export default function Dashboard() {
 
             {/* Alerts */}
             {(pendingApts.length > 0 || lowStock.length > 0) && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+                <div className="dashboard-alerts">
                     {pendingApts.length > 0 && (
-                        <div style={{ padding: '12px 18px', background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.15)', borderRadius: 10, display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }} onClick={() => navigate('/admin/appointments')}>
-                            <Clock size={16} style={{ color: '#FBBF24', flexShrink: 0 }} />
-                            <span style={{ fontSize: 13, color: '#CCC', flex: 1 }}>
-                                <strong style={{ color: '#FBBF24' }}>{pendingApts.length} pending appointment{pendingApts.length > 1 ? 's' : ''}</strong> need{pendingApts.length === 1 ? 's' : ''} confirmation
+                        <div className="dashboard-alert alert-warning" onClick={() => navigate('/admin/appointments')}>
+                            <Clock size={16} className="dashboard-alert-icon" />
+                            <span className="dashboard-alert-text">
+                                <strong>{pendingApts.length}</strong> pending appointment{pendingApts.length > 1 ? 's' : ''} need{pendingApts.length === 1 ? 's' : ''} confirmation
                             </span>
-                            <ChevronRight size={14} style={{ color: '#666' }} />
+                            <button className="admin-btn admin-btn-ghost admin-btn-sm dashboard-alert-action">Review &rarr;</button>
                         </div>
                     )}
                     {lowStock.length > 0 && (
-                        <div style={{ padding: '12px 18px', background: 'rgba(232,93,93,0.06)', border: '1px solid rgba(232,93,93,0.15)', borderRadius: 10, display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }} onClick={() => navigate('/admin/inventory')}>
-                            <AlertTriangle size={16} style={{ color: '#E85D5D', flexShrink: 0 }} />
-                            <span style={{ fontSize: 13, color: '#CCC', flex: 1 }}>
-                                <strong style={{ color: '#E85D5D' }}>{lowStock.length} product{lowStock.length > 1 ? 's' : ''}</strong> running low on stock
+                        <div className="dashboard-alert alert-danger" onClick={() => navigate('/admin/inventory')}>
+                            <AlertTriangle size={16} className="dashboard-alert-icon" />
+                            <span className="dashboard-alert-text">
+                                <strong>{lowStock.length}</strong> product{lowStock.length > 1 ? 's' : ''} running low on stock
                             </span>
-                            <ChevronRight size={14} style={{ color: '#666' }} />
+                            <button className="admin-btn admin-btn-ghost admin-btn-sm dashboard-alert-action">Review &rarr;</button>
                         </div>
                     )}
                 </div>
             )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20 }}>
+            <div className="dashboard-grid">
                 <div>
                     {/* Upcoming Appointments */}
                     <div className="admin-form-card" style={{ marginBottom: 20 }}>
@@ -102,14 +103,19 @@ export default function Dashboard() {
                                 <thead><tr><th>Date</th><th>Time</th><th>Client</th><th>Service</th><th>Branch</th><th>Status</th></tr></thead>
                                 <tbody>
                                     {upcoming.length === 0 ? (
-                                        <tr><td colSpan={6} style={{ textAlign: 'center', padding: 24, color: '#666' }}>No upcoming appointments</td></tr>
+                                        <tr><td colSpan={6}>
+                                            <div className="admin-empty" style={{ padding: 40 }}>
+                                                <Calendar size={32} className="admin-empty-icon" style={{ opacity: 0.5, margin: '0 auto 16px' }} />
+                                                <h3 style={{ fontSize: 16 }}>No upcoming appointments</h3>
+                                            </div>
+                                        </td></tr>
                                     ) : upcoming.map(apt => (
                                         <tr key={apt.id}>
                                             <td>{new Date(apt.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</td>
                                             <td>{apt.time}</td>
-                                            <td style={{ fontWeight: 500, color: '#E8E8E8' }}>{apt.clientName}</td>
-                                            <td>{apt.service}</td>
-                                            <td>{apt.branch}</td>
+                                            <td className="cell-primary" style={{ fontWeight: 600, color: 'var(--text-bright)' }}>{apt.clientName}</td>
+                                            <td className="cell-secondary">{apt.service}</td>
+                                            <td className="cell-secondary">{apt.branch}</td>
                                             <td><span className={`status-badge ${apt.status}`}>{apt.status}</span></td>
                                         </tr>
                                     ))}
@@ -130,9 +136,9 @@ export default function Dashboard() {
                                 <tbody>
                                     {recentInvoices.map(inv => (
                                         <tr key={inv.id} style={{ cursor: 'pointer' }} onClick={() => navigate(`/admin/invoices/${inv.id}`)}>
-                                            <td style={{ color: '#C17F59', fontWeight: 500 }}>{inv.invoiceNumber}</td>
-                                            <td>{inv.clientName}</td>
-                                            <td style={{ fontWeight: 600 }}>₹{inv.total.toLocaleString()}</td>
+                                            <td className="cell-primary" style={{ color: 'var(--text-bright)', fontWeight: 600 }}>{inv.invoiceNumber}</td>
+                                            <td className="cell-primary">{inv.clientName}</td>
+                                            <td className="cell-secondary" style={{ fontWeight: 600 }}>₹{inv.total.toLocaleString()}</td>
                                             <td><span className={`status-badge ${inv.status === 'paid' ? 'confirmed' : inv.status === 'sent' ? 'pending' : inv.status}`}>{inv.status}</span></td>
                                         </tr>
                                     ))}
@@ -147,18 +153,18 @@ export default function Dashboard() {
                     {/* Revenue Summary */}
                     <div className="admin-form-card" style={{ marginBottom: 20 }}>
                         <h3 style={{ margin: '0 0 16px', fontSize: 14 }}>Revenue Summary</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#CCC' }}>
-                                <span>This Month</span>
-                                <span style={{ fontWeight: 600, color: '#4ADE80' }}>₹{monthRevenue.toLocaleString()}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>This Month</span>
+                                <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--success-light)' }}>₹{monthRevenue.toLocaleString()}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#CCC' }}>
-                                <span>All Time</span>
-                                <span style={{ fontWeight: 600, color: '#C17F59' }}>₹{allPaidTotal.toLocaleString()}</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>All Time</span>
+                                <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--accent-alt)' }}>₹{allPaidTotal.toLocaleString()}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#CCC' }}>
-                                <span>Invoices (Paid)</span>
-                                <span style={{ fontWeight: 500 }}>{invoices.filter(i => i.status === 'paid').length}</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="dashboard-revenue-divider">
+                                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>INVOICES (PAID)</span>
+                                <span className="dashboard-counter-badge">{invoices.filter(i => i.status === 'paid').length}</span>
                             </div>
                         </div>
                     </div>
@@ -168,10 +174,10 @@ export default function Dashboard() {
                         <h3 style={{ margin: '0 0 16px', fontSize: 14 }}>Popular Services</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                             {topServices.map(([name, count], i) => (
-                                <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <span style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(193,127,89,0.15)', color: '#C17F59', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600, flexShrink: 0 }}>{i + 1}</span>
-                                    <span style={{ flex: 1, fontSize: 12, color: '#CCC', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</span>
-                                    <span style={{ fontSize: 11, color: '#888', flexShrink: 0 }}>{count}x</span>
+                                <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '6px 0' }}>
+                                    <span style={{ fontFamily: 'monospace', color: 'var(--text-dim)', fontSize: 12, width: 20 }}>{i + 1}.</span>
+                                    <span className="cell-primary" style={{ flex: 1, fontSize: 13 }}>{name}</span>
+                                    <span style={{ fontSize: 11, color: 'var(--text-muted)', flexShrink: 0 }}>{count}x</span>
                                 </div>
                             ))}
                         </div>
@@ -181,14 +187,14 @@ export default function Dashboard() {
                     {lowStock.length > 0 && (
                         <div className="admin-form-card">
                             <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '0 0 12px' }}>
-                                <Package size={14} style={{ color: '#E85D5D' }} />
-                                <h3 style={{ margin: 0, fontSize: 14, color: '#E85D5D' }}>Low Stock</h3>
+                                <Package size={14} style={{ color: 'var(--danger)' }} />
+                                <h3 style={{ margin: 0, fontSize: 14, color: 'var(--danger)' }}>Low Stock</h3>
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                 {lowStock.map(item => (
                                     <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12 }}>
-                                        <span style={{ color: '#CCC' }}>{item.name}</span>
-                                        <span style={{ color: '#E85D5D', fontWeight: 600 }}>{item.currentStock} left</span>
+                                        <span style={{ color: 'var(--text-secondary)' }}>{item.name}</span>
+                                        <span style={{ color: 'var(--danger)', fontWeight: 600 }}>{item.currentStock} left</span>
                                     </div>
                                 ))}
                             </div>

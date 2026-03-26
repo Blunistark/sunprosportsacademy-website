@@ -129,15 +129,15 @@ export default function Services() {
                         ) : filtered.map(svc => (
                             <tr key={svc.id} style={{ opacity: svc.isActive ? 1 : 0.5 }}>
                                 <td>
-                                    <div style={{ fontWeight: 500, color: '#E8E8E8' }}>{svc.name}</div>
-                                    <div style={{ fontSize: 11, color: '#666', maxWidth: 300 }}>{svc.description}</div>
+                                    <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{svc.name}</div>
+                                    <div style={{ fontSize: 11, color: 'var(--text-dim)', maxWidth: 300 }}>{svc.description}</div>
                                 </td>
                                 <td><span className={`category-badge ${svc.category}`}>{categoryLabels[svc.category]}</span></td>
                                 <td>{svc.duration} min</td>
-                                <td style={{ fontWeight: 600, color: '#C17F59' }}>₹{svc.price.toLocaleString()}</td>
+                                <td style={{ fontWeight: 600, color: 'var(--accent)' }}>₹{svc.price.toLocaleString()}</td>
                                 <td>
                                     <button className="admin-btn admin-btn-ghost admin-btn-sm" onClick={() => toggleActive(svc.id, svc.isActive)} title={svc.isActive ? 'Deactivate' : 'Activate'}>
-                                        {svc.isActive ? <ToggleRight size={18} style={{ color: '#4ADE80' }} /> : <ToggleLeft size={18} />}
+                                        {svc.isActive ? <ToggleRight size={18} style={{ color: 'var(--success-light)' }} /> : <ToggleLeft size={18} />}
                                     </button>
                                 </td>
                                 <td>

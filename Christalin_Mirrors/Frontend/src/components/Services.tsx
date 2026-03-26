@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { StaggerContainer, StaggerItem } from './Animations'
-import { Sparkles } from 'lucide-react'
-import featuredImg from '../assets/featured-service.png'
+import { Sparkles, ChevronLeft, ChevronRight } from 'lucide-react'
+import featuredService1 from '../assets/featured-service.png'
+import featuredService2 from '../assets/collection-editorial.png'
+import featuredService3 from '../assets/collection-balayage.png'
+import featuredService4 from '../assets/gallery-1.png'
+import featuredService5 from '../assets/gallery-4.png'
 import './Services.css'
 
 type Category = 'all' | 'hair' | 'skin' | 'korean' | 'womens' | 'mens'
@@ -61,10 +65,65 @@ const tabs: { label: string; value: Category; highlight?: boolean }[] = [
     { label: "Men's", value: 'mens' },
 ]
 
+// Featured services for the horizontal scroll cards
+const featuredServices = [
+    {
+        name: 'Korean Head Spa Rituals',
+        badge: 'Signature Experience',
+        desc: 'Immerse yourself in our signature K-beauty head spa experience — a luxurious journey combining deep cleansing, hydra restoration, scalp renewal, and the ultimate K-Glow ritual. Designed to rejuvenate both scalp and soul.',
+        tags: ['K-Beauty', 'Head Spa', 'Premium'],
+        isKorean: true,
+        image: featuredService1
+    },
+    {
+        name: 'Luxury Bridal Makeover',
+        badge: 'Bridal Exclusive',
+        desc: 'Complete bridal transformation combining high-definition HD or Airbrush makeup, professional hair styling, intricate saree draping, and essential skincare prep tailored for your perfect day.',
+        tags: ['Bridal', 'Makeup', 'Styling'],
+        isKorean: false,
+        image: featuredService2
+    },
+    {
+        name: 'Balayage & Color Mastery',
+        badge: 'Trending',
+        desc: 'Expert hand-painted natural gradients and sun-kissed looks created with premium ammonia-free colors. Express your unique style with fashion shades and meticulously crafted creative highlights.',
+        tags: ['Color', 'Balayage', 'Creative'],
+        isKorean: false,
+        image: featuredService3
+    },
+    {
+        name: 'Glass Skin Facial',
+        badge: 'K-Beauty Ritual',
+        desc: 'Achieve the coveted flawless glass skin glow with our signature Korean hydra facial protocol. Utilizing premium imported serums and advanced restorative hydration techniques to deeply nourish your skin.',
+        tags: ['Korean', 'Facial', 'Glow'],
+        isKorean: true,
+        image: featuredService4
+    },
+    {
+        name: "Men's Premium Grooming Suite",
+        badge: 'For Him',
+        desc: 'The complete elevated men\'s experience. Precision creative cuts, master beard sculpting, smoothing keratin treatments, and premium hair coloring, all delivered in a refined environment.',
+        tags: ['Grooming', 'Cuts', 'Beard'],
+        isKorean: false,
+        image: featuredService5
+    },
+]
+
 export default function Services() {
     const [active, setActive] = useState<Category>('all')
+    const scrollRef = useRef<HTMLDivElement>(null)
 
     const filtered = active === 'all' ? services : services.filter(s => s.category === active)
+
+    const scroll = (dir: 'left' | 'right') => {
+        if (scrollRef.current) {
+            // Scroll by exactly one visible card width, accounting for the gap
+            const cardWidth = scrollRef.current.clientWidth
+            const gap = 18 // CSS gap value
+            const amount = cardWidth + gap
+            scrollRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' })
+        }
+    }
 
     return (
         <section className="services section" id="services">
@@ -83,33 +142,40 @@ export default function Services() {
                     </StaggerItem>
                 </StaggerContainer>
 
-                {/* Featured service — Korean Head Spa */}
+                {/* Featured Services — Horizontal Scroll Cards */}
                 <motion.div
-                    className="featured-service korean-featured"
+                    className="featured-scroll-wrapper"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <div className="featured-service-image">
-                        <img src={featuredImg} alt="Korean Head Spa Rituals" loading="lazy" />
-                    </div>
-                    <div className="featured-service-content">
-                        <span className="featured-badge">
-                            <Sparkles size={12} style={{ marginRight: 6, display: 'inline' }} />
-                            Signature Experience
-                        </span>
-                        <h3 className="featured-service-name">Korean Head Spa Rituals</h3>
-                        <p className="featured-service-desc">
-                            Immerse yourself in our signature K-beauty head spa experience — a luxurious journey
-                            combining deep cleansing, hydra restoration, scalp renewal, and the ultimate K-Glow
-                            ritual. Designed to rejuvenate both scalp and soul.
-                        </p>
-                        <div className="featured-service-meta">
-                            <span className="featured-service-tag">K-Beauty</span>
-                            <span className="featured-service-tag">Head Spa</span>
-                            <span className="featured-service-tag">Premium</span>
+                    <div className="featured-scroll-header">
+                        <span className="featured-scroll-label">✦ Featured</span>
+                        <div className="featured-scroll-arrows">
+                            <button className="scroll-arrow" onClick={() => scroll('left')} aria-label="Scroll left"><ChevronLeft size={18} /></button>
+                            <button className="scroll-arrow" onClick={() => scroll('right')} aria-label="Scroll right"><ChevronRight size={18} /></button>
                         </div>
+                    </div>
+                    <div className="featured-scroll-track" ref={scrollRef}>
+                        {featuredServices.map((svc) => (
+                            <div key={svc.name} className={`featured-scroll-card ${svc.isKorean ? 'korean-card' : ''}`}>
+                                <div className="featured-scroll-image">
+                                    <img src={svc.image} alt={svc.name} loading="lazy" />
+                                </div>
+                                <div className="featured-scroll-content">
+                                    <span className="featured-card-badge">
+                                        {svc.isKorean && <Sparkles size={11} style={{ marginRight: 4 }} />}
+                                        {svc.badge}
+                                    </span>
+                                    <h3 className="featured-card-name">{svc.name}</h3>
+                                    <p className="featured-card-desc">{svc.desc}</p>
+                                    <div className="featured-card-tags">
+                                        {svc.tags.map(t => <span key={t} className="featured-card-tag">{t}</span>)}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </motion.div>
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Plus, Search, Check, X, Trash2, Clock } from 'lucide-react'
-import { appointmentStore } from '../data/store'
-import type { Appointment } from '../data/types'
+import { appointmentStore, serviceStore, clientStore, staffStore } from '../data/store'
+import type { Appointment, ServiceRecord, Client, StaffMember } from '../data/types'
 import '../AdminShared.css'
 
 const timeSlots = [
@@ -14,6 +14,7 @@ const emptyForm = {
     clientName: '', clientEmail: '', clientPhone: '',
     date: '', time: '', service: '', stylist: '',
     status: 'pending' as const, notes: '', branch: 'Bengaluru',
+    clientId: '', staffId: '', serviceId: ''
 }
 
 export default function Appointments() {
@@ -23,8 +24,18 @@ export default function Appointments() {
     const [showForm, setShowForm] = useState(false)
     const [form, setForm] = useState(emptyForm)
 
+    // Data for dropdowns (Fix 7)
+    const [services, setServices] = useState<ServiceRecord[]>([])
+    const [clients, setClients] = useState<Client[]>([])
+    const [staffList, setStaffList] = useState<StaffMember[]>([])
+
     const reload = () => setAppointments(appointmentStore.getAll())
-    useEffect(() => { reload() }, [])
+    useEffect(() => {
+        reload()
+        setServices(serviceStore.getAll().filter(s => s.isActive))
+        setClients(clientStore.getAll())
+        setStaffList(staffStore.getAll().filter(s => s.isActive))
+    }, [])
 
     const filtered = appointments.filter(a => {
         const matchSearch = a.clientName.toLowerCase().includes(search.toLowerCase()) || a.service.toLowerCase().includes(search.toLowerCase())
@@ -34,7 +45,17 @@ export default function Appointments() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        appointmentStore.create(form)
+        // Find entities to get IDs (Fix 7 / Task 1)
+        const matchedClient = clients.find(c => c.name === form.clientName)
+        const matchedStaff = staffList.find(s => s.name === form.stylist)
+        const matchedService = services.find(s => s.name === form.service)
+        
+        appointmentStore.create({
+            ...form,
+            clientId: matchedClient?.id || '',
+            staffId: matchedStaff?.id || '',
+            serviceId: matchedService?.id || '',
+        })
         setForm(emptyForm)
         setShowForm(false)
         reload()
@@ -85,7 +106,10 @@ export default function Appointments() {
                             </div>
                             <div className="admin-form-group">
                                 <label className="admin-form-label">Service *</label>
-                                <input className="admin-form-input" value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} placeholder="e.g. Balayage" required />
+                                <select className="admin-form-select" value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} required>
+                                    <option value="">Select service</option>
+                                    {services.map(s => <option key={s.id} value={s.name}>{s.name}</option>)}
+                                </select>
                             </div>
                             <div className="admin-form-group">
                                 <label className="admin-form-label">Date *</label>
@@ -100,7 +124,10 @@ export default function Appointments() {
                             </div>
                             <div className="admin-form-group">
                                 <label className="admin-form-label">Stylist</label>
-                                <input className="admin-form-input" value={form.stylist} onChange={e => setForm({ ...form, stylist: e.target.value })} placeholder="Assigned stylist" />
+                                <select className="admin-form-select" value={form.stylist} onChange={e => setForm({ ...form, stylist: e.target.value })}>
+                                    <option value="">Select stylist (optional)</option>
+                                    {staffList.map(s => <option key={s.id} value={s.name}>{s.name} ({s.role})</option>)}
+                                </select>
                             </div>
                             <div className="admin-form-group">
                                 <label className="admin-form-label">Branch</label>
@@ -161,30 +188,35 @@ export default function Appointments() {
                         ) : filtered.map(apt => (
                             <tr key={apt.id}>
                                 <td>
-                                    <div style={{ fontWeight: 500, color: '#E8E8E8' }}>{apt.clientName}</div>
-                                    <div style={{ fontSize: 11, color: '#666' }}>{apt.clientEmail}</div>
+                                    <div className="cell-primary" style={{ fontSize: 14 }}>{apt.clientName}</div>
+                                    <div className="cell-secondary">{apt.clientEmail}</div>
                                 </td>
                                 <td>{new Date(apt.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                                 <td><span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Clock size={12} />{apt.time}</span></td>
-                                <td>{apt.service}</td>
-                                <td>{apt.stylist || '—'}</td>
-                                <td>{apt.branch}</td>
-                                <td><span className={`status-badge ${apt.status}`}>{apt.status}</span></td>
+                                <td className="cell-secondary">{apt.service}</td>
+                                <td className="cell-secondary">{apt.stylist || '—'}</td>
+                                <td className="cell-secondary">{apt.branch}</td>
+                                <td>
+                                    <span className={`status-badge ${apt.status}`}>
+                                        <span className="status-dot"></span>
+                                        {apt.status}
+                                    </span>
+                                </td>
                                 <td>
                                     <div className="admin-actions">
                                         {apt.status === 'pending' && (
                                             <>
                                                 <button className="admin-btn admin-btn-ghost admin-btn-sm" title="Confirm" onClick={() => updateStatus(apt.id, 'confirmed')}>
-                                                    <Check size={14} style={{ color: '#4ADE80' }} />
+                                                    <Check size={14} style={{ color: 'var(--success-light)' }} />
                                                 </button>
                                                 <button className="admin-btn admin-btn-ghost admin-btn-sm" title="Cancel" onClick={() => updateStatus(apt.id, 'cancelled')}>
-                                                    <X size={14} style={{ color: '#E85D5D' }} />
+                                                    <X size={14} style={{ color: 'var(--danger)' }} />
                                                 </button>
                                             </>
                                         )}
                                         {apt.status === 'confirmed' && (
                                             <button className="admin-btn admin-btn-ghost admin-btn-sm" title="Mark Complete" onClick={() => updateStatus(apt.id, 'completed')}>
-                                                <Check size={14} style={{ color: '#60A5FA' }} />
+                                                <Check size={14} style={{ color: 'var(--info)' }} />
                                             </button>
                                         )}
                                         <button className="admin-btn admin-btn-ghost admin-btn-sm" title="Delete" onClick={() => deleteApt(apt.id)}>
