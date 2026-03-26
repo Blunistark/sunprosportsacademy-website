@@ -152,11 +152,10 @@ export default function Services() {
                 >
                     <div className="featured-scroll-header">
                         <span className="featured-scroll-label">✦ Featured</span>
-                        <div className="featured-scroll-arrows">
-                            <button className="scroll-arrow" onClick={() => scroll('left')} aria-label="Scroll left"><ChevronLeft size={18} /></button>
-                            <button className="scroll-arrow" onClick={() => scroll('right')} aria-label="Scroll right"><ChevronRight size={18} /></button>
-                        </div>
                     </div>
+                    <div className="featured-carousel-container">
+                        <button className="carousel-arrow arrow-left" onClick={() => scroll('left')} aria-label="Scroll left"><ChevronLeft size={24} /></button>
+                        <button className="carousel-arrow arrow-right" onClick={() => scroll('right')} aria-label="Scroll right"><ChevronRight size={24} /></button>
                     <div className="featured-scroll-track" ref={scrollRef}>
                         {featuredServices.map((svc) => (
                             <div key={svc.name} className={`featured-scroll-card ${svc.isKorean ? 'korean-card' : ''}`}>
@@ -176,6 +175,7 @@ export default function Services() {
                                 </div>
                             </div>
                         ))}
+                    </div>
                     </div>
                 </motion.div>
 
