@@ -4,9 +4,32 @@ This document provides step-by-step instructions to configure your Virtual Machi
 
 ---
 
-## 1. Cloudflare Configuration
+## Phase 3: Domain & SSL (Cloudflare Setup)
 
-Cloudflare acts as your DNS manager and security layer.
+To ensure a professional "Green Lock" and high performance, we use Cloudflare for DNS and SSL.
+
+### 1. Cloudflare Configuration
+1.  **Add Site**: Enter `sunprosportsacademy.com` in your Cloudflare Dashboard.
+2.  **DNS Verification**:
+    - **Type A**: `@` -> `134.209.155.190` (Ensure Proxy is **ON/Orange**).
+    - **Type CNAME**: `www` -> `sunprosportsacademy.com` (Ensure Proxy is **ON/Orange**).
+3.  **SSL/TLS Settings**:
+    - Navigate to **SSL/TLS > Overview**.
+    - Set Encryption Mode to **Full**.
+    - This ensures the connection between Cloudflare and your VM is secure.
+
+### 2. Hostinger Nameserver Migration
+1.  Log in to **Hostinger** > **Domains**.
+2.  Find **Nameservers** and click **Change**.
+3.  Replace the default Hostinger nameservers with the ones provided by Cloudflare:
+    - *Example*: `nina.ns.cloudflare.com`
+    - *Example*: `oliver.ns.cloudflare.com`
+4.  **Wait for Propagation**: This can take anywhere from 15 minutes to 24 hours (usually fast).
+
+### 3. Verification
+Once the nameservers update, visit [https://sunprosportsacademy.com](https://sunprosportsacademy.com).
+- Click the **Padlock icon** in the browser to verify the Cloudflare certificate.
+- Your site is now protected by Cloudflare's WAF and CDN.
 
 ### A. DNS Settings
 1. Log in to your Cloudflare Dashboard.

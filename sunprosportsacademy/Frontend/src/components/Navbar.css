@@ -229,8 +229,22 @@
 
 /* ─── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 991px) {
+    .navbar-inner {
+        grid-template-columns: 1fr auto auto; /* Realign for mobile toggle */
+        padding: 0 20px;
+    }
+
     .navbar-links {
         display: none;
+    }
+
+    .nav-center {
+        width: 120px;
+        transform: translateY(10px);
+    }
+
+    .navbar-logo-center {
+        height: 80px; /* Smaller logo for mobile */
     }
 
     .navbar-menu-btn {
@@ -239,5 +253,9 @@
 
     .navbar-cta.desktop-only {
         display: none;
+    }
+    
+    .navbar.scrolled {
+        padding: 10px 0 30px 0;
     }
 }
