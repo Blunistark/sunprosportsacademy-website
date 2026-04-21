@@ -83,8 +83,9 @@
 .partner-content-header {
     font-family: var(--font-heading);
     font-size: 1.1rem;
-    color: var(--bg-dark);
+    color: var(--primary-navy); /* Changed from bg-dark to primary-navy for consistency */
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
 .partner-points {
@@ -94,13 +95,13 @@
 
 .partner-points li {
     font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: var(--bg-dark);
+    font-size: 0.9rem;
+    color: #4A5568; /* Solid slate gray for perfect readability on white/light-gray */
     margin-bottom: 12px;
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    line-height: 1.4;
+    line-height: 1.5;
     text-align: left;
 }
 
@@ -129,14 +130,14 @@
 }
 
 .label-top {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .label-bottom {
-    font-size: 0.6rem;
-    opacity: 0.6;
+    font-size: 0.7rem;
+    opacity: 0.8;
 }
 
 .footer-reach {
@@ -144,9 +145,9 @@
 }
 
 .reach-label {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    opacity: 0.6;
+    opacity: 0.8;
     margin: 0;
 }
 

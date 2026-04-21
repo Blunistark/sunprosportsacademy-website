@@ -40,7 +40,7 @@ export default function Navbar({ theme, toggleTheme, isAppLoading, scrolled }: N
                 <div className="navbar-inner">
                     {/* Left Group */}
                     <div className="nav-group nav-left desktop-only-flex">
-                        {navLinks.slice(0, 3).map(link => (
+                        {navLinks.slice(0, 4).map(link => (
                             <a
                                 key={link.href}
                                 href={link.href}
@@ -80,7 +80,7 @@ export default function Navbar({ theme, toggleTheme, isAppLoading, scrolled }: N
                     {/* Right Group & Actions */}
                     <div className="nav-group nav-right">
                         <div className="nav-links-right desktop-only-flex">
-                            {navLinks.slice(3).map(link => (
+                            {navLinks.slice(4).map(link => (
                                 <a
                                     key={link.href}
                                     href={link.href}

@@ -92,12 +92,6 @@ export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: bool
                 </motion.div>
             </motion.div>
 
-            <div className="hero-scroll-indicator">
-                <div className="mouse">
-                    <div className="wheel" />
-                </div>
-                <span>Explore More</span>
-            </div>
         </section>
     )
 }

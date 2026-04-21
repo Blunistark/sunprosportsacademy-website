@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import { StaggerContainer, StaggerItem } from './Animations'
-import aboutImg from '../assets/about-salon.png'
 import './About.css'
+
+// Using a premium infrastructure/stadium image as placeholder
+const visionImg = 'https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=2670&auto=format&fit=crop';
 
 export default function About() {
     return (
@@ -10,7 +12,7 @@ export default function About() {
                 <div className="about-inner">
                     {/* Image */}
                     <StaggerItem className="about-image-wrapper" xOffset={-40} yOffset={0}>
-                        <img src={aboutImg} alt="Christalin Mirrors Salon" className="about-image" loading="lazy" />
+                        <img src={visionImg} alt="Sun Pro Sports Academy Vision" className="about-image" loading="lazy" />
                     </StaggerItem>
 
                     {/* Text */}

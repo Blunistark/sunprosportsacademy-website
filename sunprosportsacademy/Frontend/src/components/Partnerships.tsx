@@ -123,7 +123,6 @@ export default function Partnerships() {
                   <img src={partner.logo} alt={partner.name} className="partner-logo-img-real" />
                 </div>
                 <h4 className="partner-title">{partner.name}</h4>
-                <p className="partner-type-header">{partner.category}</p>
               </div>
 
               <div className="partner-card-body">
