@@ -62,7 +62,7 @@ export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: bool
                         </div>
 
                         <div className="title-side title-right">
-                            <span className="text-gold">Sports</span>
+                            <span className="text-gold">Of Sports</span>
                             <span className="text-gold">Infrastructure</span>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: bool
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
                 >
-                    Transforming university campuses into vibrant hubs of athletic excellence through state-of-the-art stadium development and multi-sport facility design.
+                    Sun Pro Sports Academy is dedicated to transforming university campuses into vibrant hubs of athletic excellence. We specialize in designing and developing world-class indoor stadiums that empower students, athletes, and institutions to perform at their highest potential.
                 </motion.p>
 
                 <motion.div
