@@ -2,6 +2,29 @@
     background: #001021;
 }
 
+.partnership-header-img-container {
+    width: 200px;
+    height: 120px;
+    margin: 0 auto 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--accent-gold);
+}
+
+.partnership-header-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    transition: transform 0.5s ease;
+}
+
+.partnership-header-img:hover {
+    transform: scale(1.1);
+}
+
 .partners-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -25,10 +48,11 @@
 
 /* Header */
 .partner-card-top {
-    background: #4A90E2; 
+    background: var(--primary-navy); 
     padding: 30px;
     text-align: center;
     color: white;
+    border-bottom: 3px solid var(--accent-gold);
 }
 
 .partner-logo-mini {
@@ -44,7 +68,7 @@
     background: white;
     padding: 10px;
     border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.2);
+    border: 3px solid var(--accent-gold);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -71,19 +95,19 @@
 .partner-badge-type {
     display: inline-block;
     padding: 4px 12px;
-    background: #F0F4F8;
-    color: #4A90E2;
+    background: var(--primary-navy);
+    color: var(--accent-gold);
     font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
-    border-radius: 20px;
+    border-radius: 2px;
     margin-bottom: 15px;
 }
 
 .partner-content-header {
     font-family: var(--font-heading);
     font-size: 1.1rem;
-    color: var(--primary-navy); /* Changed from bg-dark to primary-navy for consistency */
+    color: var(--primary-navy);
     margin-bottom: 20px;
     font-weight: 700;
 }
@@ -96,7 +120,7 @@
 .partner-points li {
     font-family: var(--font-body);
     font-size: 0.9rem;
-    color: #4A5568; /* Solid slate gray for perfect readability on white/light-gray */
+    color: #4A5568;
     margin-bottom: 12px;
     display: flex;
     align-items: flex-start;
@@ -106,20 +130,20 @@
 }
 
 .check-icon {
-    color: #4A90E2;
+    color: var(--accent-gold);
     font-weight: bold;
     font-size: 0.9rem;
 }
 
 /* Footer */
 .partner-card-footer {
-    background: var(--bg-dark);
+    background: #f8fafc;
     padding: 20px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--primary-navy);
+    border-top: 1px solid rgba(0, 31, 63, 0.1);
 }
 
 .footer-label {
@@ -137,7 +161,7 @@
 
 .label-bottom {
     font-size: 0.7rem;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .footer-reach {
@@ -147,7 +171,7 @@
 .reach-label {
     font-size: 0.7rem;
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 0.7;
     margin: 0;
 }
 

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { StaggerContainer, StaggerItem } from './Animations'
+import prehabImg from '../assets/prehab-training.png'
 import './EmpoweringMessage.css'
 
 export default function EmpoweringMessage() {
@@ -7,7 +8,7 @@ export default function EmpoweringMessage() {
         <section className="empowering-section section" id="vision-message">
             <div className="container">
                 <StaggerContainer className="empowering-inner">
-                    <StaggerItem>
+                    <StaggerItem className="empowering-content-wrapper">
                         <div className="empowering-content">
                             <span className="section-label">Empowering Campuses Through Sports</span>
                             <h2 className="empowering-title">Our Commitment to Excellence</h2>
@@ -29,6 +30,13 @@ export default function EmpoweringMessage() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 1, delay: 0.5 }}
                             />
+                        </div>
+                    </StaggerItem>
+
+                    <StaggerItem className="empowering-image-side">
+                        <div className="empowering-image-container">
+                            <img src={prehabImg} alt="Athletic Training Excellence" className="empowering-img-real" />
+                            <div className="img-overlay-gold" />
                         </div>
                     </StaggerItem>
                 </StaggerContainer>

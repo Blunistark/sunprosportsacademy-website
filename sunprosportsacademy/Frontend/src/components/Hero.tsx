@@ -4,8 +4,7 @@ import { ChevronRight } from 'lucide-react'
 import logo from '../assets/Logo/Logo.png'
 import './Hero.css'
 
-// Using a premium stadium glass architecture image as placeholder
-const heroImg = 'https://images.unsplash.com/photo-1599735073323-1d643878b39a?q=80&w=2670&auto=format&fit=crop';
+import heroImg from '../assets/hero-arena.png'
 
 export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: boolean, isScrolled?: boolean }) {
     return (

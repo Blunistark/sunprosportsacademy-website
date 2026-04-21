@@ -2,8 +2,7 @@ import { motion } from 'framer-motion'
 import { StaggerContainer, StaggerItem } from './Animations'
 import './About.css'
 
-// Using a premium infrastructure/stadium image as placeholder
-const visionImg = 'https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=2670&auto=format&fit=crop';
+import visionImg from '../assets/campus-excellence.png'
 
 export default function About() {
     return (

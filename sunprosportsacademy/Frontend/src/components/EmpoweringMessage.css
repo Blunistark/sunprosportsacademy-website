@@ -1,25 +1,25 @@
 .empowering-section {
     background: #001021;
     color: white;
-    text-align: center;
+    text-align: left;
     overflow: hidden;
 }
 
 .empowering-inner {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
     align-items: center;
-    min-height: 400px;
+    min-height: 500px;
 }
 
 .empowering-content {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 100%;
 }
 
 .empowering-title {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     line-height: 1.1;
     margin: 24px 0 40px;
     color: var(--accent-gold);
@@ -28,35 +28,63 @@
 
 .empowering-body {
     font-family: var(--font-body);
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    line-height: 1.6;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.7;
     color: var(--text-white);
     opacity: 0.9;
 }
 
 .lead-text {
-    font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     margin-bottom: 24px;
     color: var(--text-white);
+    font-weight: 500;
 }
 
 .empowering-line {
     height: 4px;
     background: var(--accent-gold);
-    margin: 60px auto 0;
+    margin: 60px 0 0;
     border-radius: 2px;
 }
 
-@media (max-width: 768px) {
+.empowering-image-side {
+    position: relative;
+}
+
+.empowering-image-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.empowering-img-real {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.img-overlay-gold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(184, 134, 11, 0.2), transparent);
+    pointer-events: none;
+}
+
+@media (max-width: 992px) {
     .empowering-inner {
-        min-height: 300px;
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
     }
-    
-    .empowering-title {
-        margin: 20px 0 30px;
-    }
-    
+
     .empowering-line {
-        margin-top: 40px;
+        margin: 40px auto 0;
     }
 }

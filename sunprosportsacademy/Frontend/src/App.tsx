@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About' // Added
-import WhatWeDo from './components/WhatWeDo'
-import Partnerships from './components/Partnerships'
-import WhyChooseUs from './components/WhyChooseUs'
-import EmpoweringMessage from './components/EmpoweringMessage' // Added
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
+import Footer from './components/Footer'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-// ... admin imports ...
-
+// Lazy Load Sections
+const WhatWeDo = lazy(() => import('./components/WhatWeDo'))
+const About = lazy(() => import('./components/About'))
+const Partnerships = lazy(() => import('./components/Partnerships'))
+const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'))
+const EmpoweringMessage = lazy(() => import('./components/EmpoweringMessage'))
+const Contact = lazy(() => import('./components/Contact'))
 // Admin
 import { initializeStore } from './admin/data/store'
 import AdminLayout from './admin/AdminLayout'
@@ -55,7 +54,7 @@ function LandingPage() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false)
-        }, 2000)
+        }, 1000)
         return () => clearTimeout(timer)
     }, [])
 
@@ -75,12 +74,14 @@ function LandingPage() {
             <Navbar theme={theme} toggleTheme={toggleTheme} isAppLoading={isLoading} scrolled={scrolled} />
             <main>
                 <Hero isAppLoading={isLoading} isScrolled={scrolled} />
-                <WhatWeDo />
-                <About />
-                <Partnerships />
-                <WhyChooseUs />
-                <EmpoweringMessage />
-                <Contact />
+                <Suspense fallback={null}>
+                    <WhatWeDo />
+                    <About />
+                    <Partnerships />
+                    <WhyChooseUs />
+                    <EmpoweringMessage />
+                    <Contact />
+                </Suspense>
             </main>
             <Footer />
         </>
