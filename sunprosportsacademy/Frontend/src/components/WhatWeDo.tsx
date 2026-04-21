@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Building2, Layout, Sliders, BarChart3 } from 'lucide-react'
+import { Building2, Layout, Sliders, BarChart3, Activity } from 'lucide-react'
 import './WhatWeDo.css'
 
 const services = [
@@ -22,6 +22,11 @@ const services = [
     icon: <BarChart3 />,
     title: "Strategic Consulting",
     desc: "Expert sports infrastructure consulting and board-level advisory for institutional growth."
+  },
+  {
+    icon: <Activity />,
+    title: "Athletic Recovery & Prehab",
+    desc: "Development of specialized sports science centers focused on injury prevention and peak performance."
   }
 ]
 

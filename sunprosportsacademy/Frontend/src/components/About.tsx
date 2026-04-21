@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { StaggerContainer, StaggerItem } from './Animations'
-import aboutImg from '../assets/about-salon.png'
 import './About.css'
+
+import visionImg from '../assets/campus-excellence.png'
 
 export default function About() {
     return (
@@ -10,7 +11,7 @@ export default function About() {
                 <div className="about-inner">
                     {/* Image */}
                     <StaggerItem className="about-image-wrapper" xOffset={-40} yOffset={0}>
-                        <img src={aboutImg} alt="Christalin Mirrors Salon" className="about-image" loading="lazy" />
+                        <img src={visionImg} alt="Sun Pro Sports Academy Vision" className="about-image" loading="lazy" />
                     </StaggerItem>
 
                     {/* Text */}

@@ -8,6 +8,7 @@ import bridgeportLogo from '../assets/collab-logos/bridgeport-labs.png'
 import athletiqLogo from '../assets/collab-logos/athletiq.png'
 import aquateinLogo from '../assets/collab-logos/aquatein.png'
 import jindalLogo from '../assets/collab-logos/jindal.png'
+import partnershipImg from '../assets/partnership-concept.png'
 
 const partners = [
   { 
@@ -88,7 +89,10 @@ export default function Partnerships() {
   return (
     <section className="partnerships section" id="partnerships">
       <div className="container">
-        <header className="wwd-header" style={{ textAlign: 'center', margin: '0 auto 80px' }}>
+        <header className="wwd-header" style={{ textAlign: 'center', margin: '0 auto 80px', position: 'relative' }}>
+          <div className="partnership-header-img-container">
+            <img src={partnershipImg} alt="Strategic Partnerships" className="partnership-header-img" />
+          </div>
           <motion.span 
             className="section-label"
             initial={{ opacity: 0 }}
@@ -123,7 +127,6 @@ export default function Partnerships() {
                   <img src={partner.logo} alt={partner.name} className="partner-logo-img-real" />
                 </div>
                 <h4 className="partner-title">{partner.name}</h4>
-                <p className="partner-type-header">{partner.category}</p>
               </div>
 
               <div className="partner-card-body">
