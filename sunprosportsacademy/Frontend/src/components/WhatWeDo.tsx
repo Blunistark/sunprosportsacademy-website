@@ -6,22 +6,22 @@ const services = [
   {
     icon: <Building2 />,
     title: "Indoor Stadium Development",
-    desc: "State-of-the-art climate-controlled environments for basketball, badminton, and multi-sport use."
+    desc: "Development of state-of-the-art climate-controlled stadiums within university campuses."
   },
   {
     icon: <Layout />,
     title: "Multi-Sport Facility Design",
-    desc: "Architectural excellence in designing versatile spaces that maximize utility and athlete performance."
+    desc: "Creation of versatile multi-sport facilities that meet international standards for performance."
   },
   {
     icon: <Sliders />,
     title: "End-to-End Execution",
-    desc: "From blueprint to grand opening, we manage the entire project lifecycle with precision."
+    desc: "Complete project management from conceptual design to precision engineering and execution."
   },
   {
     icon: <BarChart3 />,
     title: "Strategic Consulting",
-    desc: "Board-level advisory for universities and organizations looking to upgrade their sports portfolio."
+    desc: "Expert sports infrastructure consulting and board-level advisory for institutional growth."
   }
 ]
 
@@ -54,7 +54,7 @@ export default function WhatWeDo() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            Delivering high-performance sports infrastructure that serves as the foundation for the next generation of athletic legends.
+            At Sun Pro Sports Academy, we bring vision, innovation, and precision to sports infrastructure. Our core focus is:
           </motion.p>
         </header>
 

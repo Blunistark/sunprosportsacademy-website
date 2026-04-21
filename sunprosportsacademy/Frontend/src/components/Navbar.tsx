@@ -17,6 +17,7 @@ export default function Navbar({ theme, toggleTheme, isAppLoading, scrolled }: N
     const navLinks = [
         { label: 'Home', href: '#home' },
         { label: 'What We Do', href: '#what-we-do' },
+        { label: 'Vision', href: '#vision' },
         { label: 'Partnerships', href: '#partnerships' },
         { label: 'Why Choose Us', href: '#why-choose-us' },
         { label: 'Contact', href: '#contact' },

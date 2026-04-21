@@ -4,13 +4,17 @@ import { AnimatePresence } from 'framer-motion'
 import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import About from './components/About' // Added
 import WhatWeDo from './components/WhatWeDo'
 import Partnerships from './components/Partnerships'
 import WhyChooseUs from './components/WhyChooseUs'
+import EmpoweringMessage from './components/EmpoweringMessage' // Added
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+// ... admin imports ...
 
 // Admin
 import { initializeStore } from './admin/data/store'
@@ -72,8 +76,10 @@ function LandingPage() {
             <main>
                 <Hero isAppLoading={isLoading} isScrolled={scrolled} />
                 <WhatWeDo />
+                <About />
                 <Partnerships />
                 <WhyChooseUs />
+                <EmpoweringMessage />
                 <Contact />
             </main>
             <Footer />

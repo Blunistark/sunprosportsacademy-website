@@ -5,7 +5,7 @@ import './About.css'
 
 export default function About() {
     return (
-        <section className="about section" id="about">
+        <section className="about section" id="vision">
             <div className="container">
                 <div className="about-inner">
                     {/* Image */}
@@ -16,32 +16,29 @@ export default function About() {
                     {/* Text */}
                     <StaggerContainer>
                         <StaggerItem>
-                            <p className="section-label about-label">About Us</p>
+                            <p className="section-label about-label">Our Vision</p>
                         </StaggerItem>
                         <StaggerItem>
-                            <h2 className="about-heading">A Refined Unisex Salon</h2>
+                            <h2 className="about-heading">Empowering the Next Generation</h2>
                         </StaggerItem>
                         <StaggerItem>
                             <p className="about-text">
-                                <strong>Christalin Mirrors</strong> is a refined unisex salon, created for individuals who
-                                appreciate quality, comfort, and elevated grooming experiences. We offer
-                                expert hair, skin, and beauty services for both women and men, combining
-                                skilled artistry with premium products and personalised attention. Our
-                                space is thoughtfully designed to feel calm, welcoming, and sophisticated,
-                                where every client is treated with care and precision.
+                                To become a <strong>trusted leader</strong> in sports infrastructure development, 
+                                empowering educational institutions to nurture talent and promote a culture of 
+                                sports and wellness across the nation.
                             </p>
                         </StaggerItem>
                         <StaggerItem>
                             <p className="about-text">
-                                At Christalin Mirrors, we believe beauty and grooming are personal journeys.
-                                Our goal is to refine your look, reflect your individuality, and help you
-                                radiate confidence every day.
+                                At Sun Pro Sports Academy, we believe that world-class facilities are the foundation 
+                                of athletic excellence. Our mission is to elevate sports culture by providing 
+                                state-of-the-art stadiums that inspire students and athletes to reach their peak potential.
                             </p>
                         </StaggerItem>
                         <StaggerItem>
                             <div className="founder-note">
-                                <p className="founder-label">Founder</p>
-                                <p className="founder-name">Sushmitha Cristalin A.</p>
+                                <p className="founder-label">Core Mission</p>
+                                <p className="founder-name">Precision, Innovation, Excellence</p>
                             </div>
                         </StaggerItem>
                     </StaggerContainer>

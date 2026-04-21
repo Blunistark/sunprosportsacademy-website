@@ -4,85 +4,168 @@
 
 .partners-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 30px;
 }
 
-.partner-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    padding: 1.5rem;
+.partner-card-detailed {
+    background: var(--bg-white);
+    border-radius: 4px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 31, 63, 0.05);
+}
+
+.partner-card-detailed:hover {
+    transform: translateY(-5px);
+}
+
+/* Header */
+.partner-card-top {
+    background: #4A90E2; 
+    padding: 30px;
     text-align: center;
-    transition: var(--transition-smooth);
-    border-radius: 4px;
+    color: white;
 }
 
-.partner-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: var(--accent-gold);
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.partner-logo-placeholder {
-    width: 100%;
-    height: 120px;
-    background: rgba(212, 175, 55, 0.05);
-    border: 1px dashed rgba(212, 175, 55, 0.3);
+.partner-logo-mini {
+    margin-bottom: 20px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
-    border-radius: 2px;
 }
 
-.placeholder-text {
+.partner-logo-img-real {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.partner-title {
     font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--accent-gold);
-    opacity: 0.6;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.partner-info {
-    width: 100%;
-}
-
-.partner-category {
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: var(--accent-gold);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.partner-name {
     font-size: 1.25rem;
-    color: var(--text-white);
+    margin-bottom: 5px;
+    color: white;
+}
+
+.partner-type-header {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* Body */
+.partner-card-body {
+    padding: 30px;
+    flex-grow: 1;
+}
+
+.partner-badge-type {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #F0F4F8;
+    color: #4A90E2;
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.partner-content-header {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--bg-dark);
+    margin-bottom: 20px;
+}
+
+.partner-points {
+    list-style: none;
+    padding: 0;
+}
+
+.partner-points li {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--bg-dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.check-icon {
+    color: #4A90E2;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.partner-card-footer {
+    background: var(--bg-dark);
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+.label-top {
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.label-bottom {
+    font-size: 0.6rem;
+    opacity: 0.6;
+}
+
+.footer-reach {
+    text-align: right;
+}
+
+.reach-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin: 0;
+}
+
+.reach-value {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .partners-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
     .partners-grid {
-        gap: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .partners-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .partner-card {
-        padding: 1.25rem;
     }
 }

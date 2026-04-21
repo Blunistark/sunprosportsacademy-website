@@ -5,23 +5,23 @@ import './WhyChooseUs.css'
 const reasons = [
   {
     icon: <ShieldCheck />,
-    title: "Proven Expertise",
-    desc: "Over a decade of experience in delivering high-fidelity sports facilities across Karnataka."
+    title: "University Expertise",
+    desc: "Deep expertise in developing high-performance sports infrastructure within university campuses."
   },
   {
     icon: <Zap />,
-    title: "Efficiency First",
-    desc: "Our project management methodology ensures on-time delivery without compromising on quality."
+    title: "World-Class Quality",
+    desc: "Unwavering commitment to international quality standards in every stadium we build."
   },
   {
     icon: <Users />,
-    title: "Athlete-Centric",
-    desc: "Every design is vetted by professional athletes to ensure the highest performance standards."
+    title: "Strong Ecosystem",
+    desc: "A powerful network of strategic sports industry partners that amplify project value."
   },
   {
     icon: <TrendingUp />,
-    title: "Board-Level Advisory",
-    desc: "We provide strategic insights that help organizations treat sports infrastructure as a valuable asset."
+    title: "Functional Innovation",
+    desc: "A core focus on sustainability, innovation, and long-term facility functionality."
   }
 ]
 
