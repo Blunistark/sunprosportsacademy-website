@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle, Send, Building } from 'lucide-react'
+import { CheckCircle, Send, Building, Phone, Mail, MapPin } from 'lucide-react'
 import './Contact.css'
 
 export default function Contact() {
@@ -55,6 +55,32 @@ export default function Contact() {
                                 <p className="contact-sub">
                                     Partner with us to build state-of-the-art sports facilities for your organization.
                                 </p>
+
+                                <div className="contact-info-grid">
+                                    <div className="contact-info-item">
+                                        <Phone size={18} className="info-icon" />
+                                        <div className="info-content">
+                                            <p className="info-label">Call Us</p>
+                                            <a href="tel:+919731882974" className="info-value">+91 9731882974</a>
+                                            <span className="info-separator">/</span>
+                                            <a href="tel:+12037151751" className="info-value">+1 (203) 715-1751</a>
+                                        </div>
+                                    </div>
+                                    <div className="contact-info-item">
+                                        <Mail size={18} className="info-icon" />
+                                        <div className="info-content">
+                                            <p className="info-label">Email Us</p>
+                                            <a href="mailto:Bhanumurthy@Sunprosportsacademy.com" className="info-value">Bhanumurthy@Sunprosportsacademy.com</a>
+                                        </div>
+                                    </div>
+                                    <div className="contact-info-item full-width">
+                                        <MapPin size={18} className="info-icon" />
+                                        <div className="info-content">
+                                            <p className="info-label">Visit Us</p>
+                                            <p className="info-value">#119 5th main 2nd Cross, Jabbor block. Vyalikaval. Bangalore-560003</p>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
                                     <div className="form-group">

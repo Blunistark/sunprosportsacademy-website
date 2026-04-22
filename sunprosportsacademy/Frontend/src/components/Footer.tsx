@@ -29,15 +29,16 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Locations */}
+                    {/* Visit Us */}
                     <div>
                         <h4 className="footer-col-title">Visit Us</h4>
                         <ul className="footer-col-list">
                             <li><strong>Corporate Office</strong></li>
-                            <li>Bengaluru, Karnataka</li>
-                            <li>India</li>
+                            <li>#119 5th main 2nd Cross</li>
+                            <li>Jabbor block, Vyalikaval</li>
+                            <li>Bangalore-560003, India</li>
                             <li style={{ marginTop: 12 }}><strong>Inquiries</strong></li>
-                            <li>Mon — Fri: 9 AM — 6 PM</li>
+                            <li>Bhanumurthy@Sunprosportsacademy.com</li>
                         </ul>
                     </div>
 
@@ -67,16 +68,16 @@ export default function Footer() {
                         © {currentYear} Sun Pro Sports Academy. All rights reserved.
                     </span>
                     <div className="footer-social-links">
-                        <a href="#" className="footer-social-link" aria-label="LinkedIn">
+                        <a href="https://linkedin.com" className="footer-social-link" aria-label="LinkedIn">
                             <Linkedin size={18} />
                         </a>
-                        <a href="#" className="footer-social-link" aria-label="Instagram">
+                        <a href="https://instagram.com" className="footer-social-link" aria-label="Instagram">
                             <Instagram size={18} />
                         </a>
-                        <a href="tel:+910000000000" className="footer-social-link" aria-label="Phone">
+                        <a href="tel:+919731882974" className="footer-social-link" aria-label="Phone">
                             <Phone size={18} />
                         </a>
-                        <a href="mailto:info@sunprosports.com" className="footer-social-link" aria-label="Email">
+                        <a href="mailto:Bhanumurthy@Sunprosportsacademy.com" className="footer-social-link" aria-label="Email">
                             <Mail size={18} />
                         </a>
                     </div>

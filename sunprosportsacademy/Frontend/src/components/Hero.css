@@ -41,7 +41,13 @@
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 900px;
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-badge {
@@ -69,8 +75,11 @@
 }
 
 .hero-title-container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto 3rem;
+    display: flex;
+    justify-content: center;
 }
 
 .hero-title-split {
@@ -88,6 +97,7 @@
     font-weight: 800;
     line-height: 1;
     text-transform: uppercase;
+    min-width: 0; /* Ensures columns can shrink to maintain center */
 }
 
 .title-left {
@@ -102,16 +112,16 @@
 }
 
 .hero-logo-center {
-    width: clamp(160px, 15vw, 200px);
-    flex-shrink: 0; /* Prevents logo from being crushed at high zoom */
-    min-width: 140px;
+    width: clamp(180px, 20vw, 250px);
+    flex-shrink: 0;
+    min-width: 160px;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 5;
-    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
+    filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.4));
 }
 
 .hero-logo-center img {
@@ -208,7 +218,7 @@
 /* ─── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
     .hero-content {
-        padding-top: 40px;
+        padding-top: 80px;
     }
 
     .hero-actions {
