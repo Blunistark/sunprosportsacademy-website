@@ -32,7 +32,9 @@ export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: bool
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
                 >
-                    <span className="dot" /> Premier Sports Infrastructure
+                    <span className="dot" />
+                    <span>Premier Sports Infrastructure</span>
+                    <span className="dot" />
                 </motion.div>
 
                 <h1 className="hero-title-container">

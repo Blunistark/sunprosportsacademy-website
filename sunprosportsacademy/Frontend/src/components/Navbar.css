@@ -14,28 +14,30 @@
 
 .navbar.scrolled {
     /* --- SMOKE EFFECT: Fading gradient instead of solid bar --- */
-    background: linear-gradient(
-        to bottom, 
-        rgba(0, 31, 63, 0.98) 0%, 
-        rgba(0, 31, 63, 0.8) 60%, 
-        transparent 100%
-    );
+    background: linear-gradient(to bottom,
+            rgba(0, 31, 63, 0.98) 0%,
+            rgba(0, 31, 63, 0.8) 60%,
+            transparent 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 12px 0 40px 0; /* Extra bottom padding for the gradient fade */
-    border-bottom: none; /* Removed the hard border line */
+    padding: 12px 0 40px 0;
+    /* Extra bottom padding for the gradient fade */
+    border-bottom: none;
+    /* Removed the hard border line */
     box-shadow: none;
 }
 
 .navbar-inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); /* Enforces equal share of outer columns */
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    /* Enforces equal share of outer columns */
     align-items: center;
     max-width: var(--container-max);
     margin: 0 auto;
     height: 100%;
     padding: 0 40px;
-    gap: 0; /* Remove gap to ensure exact centering */
+    gap: 0;
+    /* Remove gap to ensure exact centering */
 }
 
 .desktop-only-flex {
@@ -72,17 +74,19 @@
     height: 0;
     position: relative;
     z-index: 1002;
-    transform: translateY(10px); /* Slightly reduced hang */
+    transform: translateY(10px);
+    /* Slightly reduced hang */
     pointer-events: none;
 }
 
 .navbar-logo-center {
     display: block;
     /* --- CHANGE THIS: Controls the size of the logo --- */
-    height: 150px; 
+    height: 100px;
     width: auto;
     filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.4));
-    pointer-events: auto; /* Makes only the logo itself clickable */
+    pointer-events: auto;
+    /* Makes only the logo itself clickable */
 }
 
 .navbar-logo-img {
@@ -231,7 +235,7 @@
 /* ─── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 991px) {
     .navbar-inner {
-        grid-template-columns: 1fr auto; 
+        grid-template-columns: 1fr auto;
         padding: 0 20px;
         display: flex;
         justify-content: space-between;
@@ -270,7 +274,7 @@
     .navbar-cta.desktop-only {
         display: none;
     }
-    
+
     .navbar.scrolled {
         padding: 10px 0 30px 0;
     }
