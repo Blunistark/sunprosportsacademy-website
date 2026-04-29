@@ -1,160 +1,54 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Menu, X } from 'lucide-react'
-import sunProLogo from '../assets/Logo/Logo.png'
+import { useState } from 'react'
 import './Navbar.css'
+import logo from '../assets/Logo/Logo.png'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
-interface NavbarProps {
-    theme: 'dark' | 'light'
-    toggleTheme: () => void
-    isAppLoading?: boolean
-    scrolled: boolean
-}
+export default function Navbar() {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-export default function Navbar({ theme, toggleTheme, isAppLoading, scrolled }: NavbarProps) {
-    const [mobileOpen, setMobileOpen] = useState(false)
-
-    const navLinks = [
-        { label: 'Home', href: '#home' },
-        { label: 'What We Do', href: '#what-we-do' },
-        { label: 'Vision', href: '#vision' },
-        { label: 'Partnerships', href: '#partnerships' },
-        { label: 'Why Choose Us', href: '#why-choose-us' },
-        { label: 'Contact', href: '#contact' },
-    ]
-
-    const scrollTo = (href: string) => {
-        setMobileOpen(false)
-        const el = document.querySelector(href)
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-    }
+    const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen)
+    const closeDrawer = () => setIsDrawerOpen(false)
 
     return (
         <>
-            <motion.nav
-                className={`navbar ${scrolled ? 'scrolled' : ''} ${isAppLoading ? 'loading' : ''}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-            >
-                <div className="navbar-inner">
-                    {/* Left Group */}
-                    <div className="nav-group nav-left desktop-only-flex">
-                        {navLinks.slice(0, 4).map(link => (
-                            <a
-                                key={link.href}
-                                href={link.href}
-                                className="navbar-link"
-                                onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                            >
-                                {link.label}
-                            </a>
-                        ))}
-                    </div>
+            <nav className="glass-navbar">
 
-                    {/* Center Logo Area */}
-                    <div className="nav-center">
-                        <AnimatePresence>
-                            {scrolled && (
-                                <motion.a
-                                    href="#"
-                                    className="navbar-logo-center"
-                                    onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-                                    layoutId="hero-logo"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 120,
-                                        damping: 24,
-                                        mass: 1
-                                    }}
-                                >
-                                    <img src={sunProLogo} alt="Sun Pro" className="navbar-logo-img" />
-                                </motion.a>
-                            )}
-                        </AnimatePresence>
-                    </div>
-
-                    {/* Right Group & Actions */}
-                    <div className="nav-group nav-right">
-                        <div className="nav-links-right desktop-only-flex">
-                            {navLinks.slice(4).map(link => (
-                                <a
-                                    key={link.href}
-                                    href={link.href}
-                                    className="navbar-link"
-                                    onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                                >
-                                    {link.label}
-                                </a>
-                            ))}
-                        </div>
-
-                        <div className="navbar-actions">
-                            <button
-                                className="theme-toggle"
-                                onClick={toggleTheme}
-                                aria-label="Toggle theme"
-                            >
-                                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                            </button>
-
-                            <a href="#contact" className="navbar-cta desktop-only" onClick={(e) => { e.preventDefault(); scrollTo('#contact') }}>
-                                Consultation
-                            </a>
-
-                            <button
-                                className="navbar-menu-btn"
-                                onClick={() => setMobileOpen(true)}
-                                aria-label="Open menu"
-                            >
-                                <Menu size={24} />
-                            </button>
-                        </div>
-                    </div>
+                {/* Desktop Links */}
+                <div className="navbar-links desktop-only">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#expertise">Expertise</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
                 </div>
-            </motion.nav>
 
-            <AnimatePresence>
-                {mobileOpen && (
-                    <motion.div
-                        className="navbar-mobile-overlay open"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        <button className="mobile-close-btn" onClick={() => setMobileOpen(false)} aria-label="Close menu">
-                            <X size={28} />
-                        </button>
-                        {navLinks.map((link, i) => (
-                            <motion.a
-                                key={link.href}
-                                href={link.href}
-                                className="navbar-link"
-                                onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1, duration: 0.4 }}
-                            >
-                                {link.label}
-                            </motion.a>
-                        ))}
-                        <motion.a
-                            href="#contact"
-                            className="navbar-cta"
-                            onClick={(e) => { e.preventDefault(); scrollTo('#contact') }}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 0.4 }}
-                        >
-                            Consultation
-                        </motion.a>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                <a href="#contact" className="navbar-cta desktop-only">
+                    <span>Explore Now</span>
+                    <div className="cta-dot" />
+                </a>
+
+                {/* Mobile Hamburger Toggle */}
+                <button className="mobile-menu-toggle" onClick={toggleDrawer} aria-label="Toggle Menu">
+                    {isDrawerOpen ? <FaTimes /> : <FaBars />}
+                </button>
+            </nav>
+
+            {/* Mobile Navigation Drawer */}
+            <div className={`mobile-drawer ${isDrawerOpen ? 'open' : ''}`}>
+                <div className="drawer-overlay" onClick={closeDrawer} />
+                <div className="drawer-content">
+                    <div className="drawer-links">
+                        <a href="#home" onClick={closeDrawer}>Home</a>
+                        <a href="#about" onClick={closeDrawer}>About</a>
+                        <a href="#expertise" onClick={closeDrawer}>Expertise</a>
+                        <a href="#services" onClick={closeDrawer}>Services</a>
+                        <a href="#contact" onClick={closeDrawer}>Contact</a>
+                    </div>
+                    <a href="#contact" className="drawer-cta" onClick={closeDrawer}>
+                        Explore Now
+                    </a>
+                </div>
+            </div>
         </>
     )
 }

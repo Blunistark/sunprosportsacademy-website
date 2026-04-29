@@ -1,0 +1,21 @@
+/* Global fixed logo wrapper — persists across all page sections */
+.global-logo-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* Size: big enough for hero, but focused for section view */
+    width: 40vw;
+    height: 60vh;
+    z-index: 15;
+    pointer-events: none;
+    will-change: transform;
+    /* Smooth transition for the position shift */
+    transition: none; /* Driven by scroll, not CSS transition */
+}
+
+@media (max-width: 768px) {
+    .global-logo-wrapper {
+        width: 95vw; /* Much wider to prevent trophy handles from clipping */
+        height: 50vh;
+    }
+}

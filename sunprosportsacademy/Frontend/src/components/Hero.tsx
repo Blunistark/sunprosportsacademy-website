@@ -1,98 +1,33 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { ChevronRight } from 'lucide-react'
-import logo from '../assets/Logo/Logo.png'
 import './Hero.css'
 
-import heroImg from '../assets/hero-arena.png'
+interface HeroProps {
+    heroExit: number // 0→1 as user scrolls out of hero
+}
 
-export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: boolean, isScrolled?: boolean }) {
+export default function Hero({ heroExit }: HeroProps) {
+    const isMobile = window.innerWidth < 768
+
     return (
-        <section className="hero" id="home">
-            <div className="hero-image-wrapper">
-                <motion.img
-                    src={heroImg}
-                    className="hero-image"
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 2, ease: "easeOut" }}
-                />
-                <div className="hero-overlay" />
+        <section className="hero-section" style={{ opacity: 1 - heroExit }}>
+            {/* Top Marquee: SUN PRO */}
+            <div className="hero-marquee-container top">
+                <div className="hero-marquee-track">
+                    <span className="marquee-text">SUN PRO </span>
+                    <span className="marquee-text">SUN PRO </span>
+                    <span className="marquee-text">SUN PRO </span>
+                    <span className="marquee-text">SUN PRO </span>
+                </div>
             </div>
 
-            <motion.div
-                className="hero-content container"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-            >
-                <motion.div
-                    className="hero-badge"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                >
-                    <span className="dot" />
-                    <span>Premier Sports Infrastructure</span>
-                    <span className="dot" />
-                </motion.div>
-
-                <h1 className="hero-title-container">
-                    <div className="hero-title-split">
-                        <div className="title-side title-left">
-                            <span>Building</span>
-                            <span>The</span>
-                            <span>Future</span>
-                        </div>
-
-                        <div className="hero-logo-center">
-                            {!isScrolled && (
-                                <motion.div
-                                    layoutId="hero-logo"
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 120,
-                                        damping: 24,
-                                        mass: 1
-                                    }}
-                                    style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                                >
-                                    <img src={logo} alt="Sun Pro" />
-                                </motion.div>
-                            )}
-                        </div>
-
-                        <div className="title-side title-right">
-                            <span className="text-gold">Of Sports</span>
-                            <span className="text-gold">Infrastructure</span>
-                        </div>
-                    </div>
-                </h1>
-
-                <motion.p
-                    className="hero-description"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                >
-                    Sun Pro Sports Academy is dedicated to transforming university campuses into vibrant hubs of athletic excellence. We specialize in designing and developing world-class indoor stadiums that empower students, athletes, and institutions to perform at their highest potential.
-                </motion.p>
-
-                <motion.div
-                    className="hero-actions"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                >
-                    <a href="#contact" className="btn btn-primary">
-                        Request a Consultation <ChevronRight size={18} style={{ marginLeft: '8px' }} />
-                    </a>
-                    <a href="#what-we-do" className="btn btn-outline" style={{ marginLeft: '1rem' }}>
-                        Our Services
-                    </a>
-                </motion.div>
-            </motion.div>
-
+            {/* Bottom Marquee: SPORTS ACADEMY */}
+            <div className="hero-marquee-container bottom">
+                <div className="hero-marquee-track reverse">
+                    <span className="marquee-text">SPORTS ACADEMY </span>
+                    <span className="marquee-text">SPORTS ACADEMY </span>
+                    <span className="marquee-text">SPORTS ACADEMY </span>
+                    <span className="marquee-text">SPORTS ACADEMY </span>
+                </div>
+            </div>
         </section>
     )
 }

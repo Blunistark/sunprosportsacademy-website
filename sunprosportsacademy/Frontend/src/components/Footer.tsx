@@ -1,86 +1,56 @@
-import { Instagram, Mail, Phone, Linkedin } from 'lucide-react'
 import './Footer.css'
+import { FaLinkedin, FaInstagram, FaPhone, FaEnvelope } from 'react-icons/fa6'
 
 export default function Footer() {
-    const currentYear = new Date().getFullYear()
-
     return (
-        <footer className="footer" id="footer">
-            <div className="container">
-                <div className="footer-inner">
-                    {/* Brand */}
-                    <div className="footer-brand-col">
-                        <div className="footer-brand-name">Sun Pro Sports Academy</div>
-                        <div className="footer-brand-tagline">Building the Future of Sports Infrastructure</div>
-                        <p className="footer-brand-desc">
-                            India's premier sports infrastructure firm specializing in stadium development, multi-sport facility design, and athletic consulting.
-                        </p>
-                    </div>
-
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="footer-col-title">Navigate</h4>
-                        <ul className="footer-col-list">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#what-we-do">What We Do</a></li>
-                            <li><a href="#partnerships">Partnerships</a></li>
-                            <li><a href="#why-choose-us">Why Choose Us</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Visit Us */}
-                    <div>
-                        <h4 className="footer-col-title">Visit Us</h4>
-                        <ul className="footer-col-list">
-                            <li><strong>Corporate Office</strong></li>
-                            <li>#119 5th main 2nd Cross</li>
-                            <li>Jabbor block, Vyalikaval</li>
-                            <li>Bangalore-560003, India</li>
-                            <li style={{ marginTop: 12 }}><strong>Inquiries</strong></li>
-                            <li>Bhanumurthy@Sunprosportsacademy.com</li>
-                        </ul>
-                    </div>
-
-                    {/* Stay Connected */}
-                    <div>
-                        <h4 className="footer-col-title">Strategic Insights</h4>
-                        <p className="footer-newsletter-desc">
-                            Subscribe to receive our latest insights on sports infrastructure and facility management.
-                        </p>
-                        <form className="footer-newsletter-form" onSubmit={(e) => e.preventDefault()}>
-                            <input
-                                type="email"
-                                className="footer-newsletter-input"
-                                placeholder="Email Address"
-                                aria-label="Email for newsletter"
-                            />
-                            <button type="submit" className="btn btn-primary footer-newsletter-btn" aria-label="Subscribe">
-                                Join
-                            </button>
-                        </form>
-                    </div>
+        <footer className="main-footer">
+            <div className="footer-content">
+                <div className="footer-section brand">
+                    <h2>Sun Pro Sports Academy</h2>
+                    <p className="footer-tagline">BUILDING THE FUTURE OF SPORTS INFRASTRUCTURE</p>
+                    <p className="footer-desc">
+                        India's premier sports infrastructure firm specializing in stadium development, multi-sport facility design, and athletic consulting.
+                    </p>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="footer-bottom">
-                    <span className="footer-copyright">
-                        © {currentYear} Sun Pro Sports Academy. All rights reserved.
-                    </span>
-                    <div className="footer-social-links">
-                        <a href="https://linkedin.com" className="footer-social-link" aria-label="LinkedIn">
-                            <Linkedin size={18} />
-                        </a>
-                        <a href="https://instagram.com" className="footer-social-link" aria-label="Instagram">
-                            <Instagram size={18} />
-                        </a>
-                        <a href="tel:+919731882974" className="footer-social-link" aria-label="Phone">
-                            <Phone size={18} />
-                        </a>
-                        <a href="mailto:Bhanumurthy@Sunprosportsacademy.com" className="footer-social-link" aria-label="Email">
-                            <Mail size={18} />
-                        </a>
+                <div className="footer-section navigate">
+                    <h3>NAVIGATE</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">What We Do</a></li>
+                        <li><a href="#expertise">Expertise</a></li>
+                        <li><a href="#services">Why Choose Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div className="footer-section visit">
+                    <h3>VISIT US</h3>
+                    <p><strong>Corporate Office</strong></p>
+                    <p>#119 5th main 2nd Cross</p>
+                    <p>Jabbor block, Vyalikaval</p>
+                    <p>Bangalore-560003, India</p>
+                    <p className="footer-inquiry"><strong>Inquiries</strong></p>
+                    <p><a href="mailto:Bhanumurthy@Sunprosportsacademy.com">Bhanumurthy@Sunprosportsacademy.com</a></p>
+                </div>
+
+                <div className="footer-section insights">
+                    <h3>STRATEGIC INSIGHTS</h3>
+                    <p>Subscribe to receive our latest insights on sports infrastructure and facility management.</p>
+                    <div className="footer-newsletter">
+                        <input type="email" placeholder="Email Address" />
+                        <button className="join-btn">JOIN</button>
                     </div>
+                </div>
+            </div>
+
+            <div className="footer-bottom">
+                <p>© 2026 Sun Pro Sports Academy. All rights reserved.</p>
+                <div className="footer-socials">
+                    <a href="#"><FaLinkedin /></a>
+                    <a href="#"><FaInstagram /></a>
+                    <a href="#"><FaPhone /></a>
+                    <a href="#"><FaEnvelope /></a>
                 </div>
             </div>
         </footer>

@@ -1,0 +1,366 @@
+/* ═══════════════════════════════════════════════════════════════
+   SectionCard — generic numbered section (01-04)
+   ═══════════════════════════════════════════════════════════════ */
+
+.section-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    will-change: opacity;
+}
+
+/* ── Number ─────────────────────────────────────────────────── */
+.sc-number {
+    position: fixed;
+    top: 50%;
+    left: 4vw;
+    transform: translateY(-50%);
+    z-index: 1;
+
+    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(14rem, 32vw, 30rem);
+    font-weight: 900;
+    line-height: 0.85;
+    color: transparent;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 0.1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    pointer-events: none;
+    user-select: none;
+    will-change: opacity;
+}
+
+/* Number on the LEFT */
+.sc-number--left {
+    left: 3vw;
+}
+
+/* Number on the RIGHT */
+.sc-number--right {
+    right: 3vw;
+    text-align: right;
+}
+
+/* ── Split Layout (Section 04) ───────────────────────────────── */
+
+.sc-glass-panel--split-left {
+    left: 4vw !important;
+    right: auto !important;
+    width: 32vw;
+    text-align: left;
+}
+
+.sc-glass-panel--split-right {
+    right: 4vw !important;
+    left: auto !important;
+    width: 32vw;
+    text-align: right;
+}
+
+.sc-number--center {
+    left: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center;
+    width: 100%;
+}
+
+.partner-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 1rem;
+}
+
+.sc-glass-panel--split-right .partner-item {
+    text-align: right;
+}
+
+/* ── Glass panel ─────────────────────────────────────────────── */
+.sc-glass-panel {
+    position: fixed;
+    top: 54%;
+    transform: translateY(-50%);
+    z-index: 5;
+
+    max-height: 80vh;
+    /* Don't exceed viewport */
+    overflow-y: auto;
+    /* Allow scrolling if content is long */
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+
+    padding: 40px 36px;
+    will-change: opacity;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.sc-glass-panel::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar Chrome/Safari */
+}
+
+.section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    text-transform: uppercase;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.section-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Custom Content Components ───────────────────────────────── */
+
+.content-highlight {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #fff;
+    padding: 5px;
+    border-radius: 4px 12px 12px 4px;
+    margin-top: 0.1rem;
+}
+
+.content-highlight h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.content-highlight p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.content-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.content-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+}
+
+.content-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #fff;
+    font-weight: bold;
+}
+
+.content-list li strong {
+    color: #fff;
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+}
+
+.partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 2rem;
+}
+
+.partner-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.partner-item span {
+    color: #fff;
+    font-weight: 600;
+    display: block;
+    font-size: 0.95rem;
+}
+
+.content-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    margin-bottom: 0.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content-image:hover {
+    transform: scale(1);
+}
+
+.commitment-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.commitment-footer p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* Panel on the RIGHT (logo is on the LEFT) */
+.sc-glass-panel--left {
+    left: 38vw;
+    right: 3vw;
+}
+
+/* Panel on the LEFT (logo is on the RIGHT) */
+.sc-glass-panel--right {
+    left: 3vw;
+    right: 38vw;
+}
+
+.sc-center-quote {
+    position: fixed;
+    top: 88%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    z-index: 20;
+    /* In front of logo */
+
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: transparent;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgb(255, 255, 255) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    pointer-events: none;
+    letter-spacing: 2px;
+}
+
+/* ── Mobile Responsiveness ───────────────────────────────────── */
+@media (max-width: 768px) {
+    .sc-glass-panel {
+        top: 35% !important;
+        /* Start below the logo zone */
+        left: 3vw !important;
+        right: 3vw !important;
+        width: 94vw !important;
+        transform: none !important;
+        /* Don't use translateY(-50%) on mobile */
+        max-height: 55vh;
+        padding: 24px 20px;
+        border-radius: 20px;
+    }
+
+    .sc-glass-panel--split-left,
+    .sc-glass-panel--split-right {
+        position: relative !important;
+        /* Stack them in the flow */
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        margin-bottom: 20px;
+        transform: none !important;
+    }
+
+    .section-4-mobile-wrapper {
+        position: fixed;
+        top: 35%;
+        left: 3vw;
+        width: 94vw;
+        height: 55vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        scrollbar-width: none;
+    }
+
+    .section-4-mobile-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sc-number {
+        font-size: 12rem !important;
+        /* Larger, more like desktop scale */
+        top: 18% !important;
+        /* Moved up as requested */
+        left: 2% !important;
+        /* Absolute Edge */
+        transform: translateY(-50%) !important;
+        /* Removed opacity override to use the full gradient from desktop */
+    }
+
+    /* Even sections: Number extreme right */
+    .section-container--split .sc-number {
+        left: auto !important;
+        right: 2% !important;
+    }
+
+    .section-04-mobile-card {
+        top: 31% !important;
+        /* Moved up to sit just below the logo */
+        min-height: auto !important;
+    }
+
+    .section-title {
+        font-size: 1.8rem !important;
+        text-align: center;
+    }
+
+    .section-desc {
+        font-size: 0.9rem !important;
+        text-align: center;
+    }
+
+    .sc-center-quote {
+        font-size: 1.5rem !important;
+        top: 90% !important;
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .content-image {
+        height: 180px !important;
+        margin-bottom: 1rem !important;
+    }
+}
