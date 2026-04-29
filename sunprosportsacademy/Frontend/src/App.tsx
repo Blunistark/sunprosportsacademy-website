@@ -122,17 +122,19 @@ export default function App() {
                 "Precision, Innovation, Excellence"
             </div>
 
-            <div
-                className="global-logo-wrapper"
-                style={{
-                    transform: `translate(calc(-50% + ${logoX}vw), calc(-50% + ${logoY}vh)) scale(${currentScale})`,
-                    opacity: logoOpacity
-                }}
-            >
-                <Suspense fallback={null}>
-                    <Logo3D spinProgress={activeSpinProgress} tilt={currentTilt} />
-                </Suspense>
-            </div>
+            {logoOpacity > 0 && (
+                <div
+                    className="global-logo-wrapper"
+                    style={{
+                        transform: `translate(calc(-50% + ${logoX}vw), calc(-50% + ${logoY}vh)) scale(${currentScale})`,
+                        opacity: logoOpacity
+                    }}
+                >
+                    <Suspense fallback={null}>
+                        <Logo3D spinProgress={activeSpinProgress} tilt={currentTilt} />
+                    </Suspense>
+                </div>
+            )}
 
             <Section01 opacity={visibilities[0]} />
             <Section02 opacity={visibilities[1]} />
