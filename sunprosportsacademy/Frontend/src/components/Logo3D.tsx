@@ -61,34 +61,54 @@ export default function Logo3D({ spinProgress = 0, tilt = 0 }: Logo3DProps) {
         let animId: number
         const animate = (time: number) => {
             animId = requestAnimationFrame(animate)
-            
+
             // Apply TILT to parent (always side-to-side relative to camera)
             const breathTilt = Math.sin(time * 0.0007) * 0.03
             pivot.rotation.z = breathTilt + tiltRef.current
-            
+
             if (model) {
                 // Apply SPIN to child
                 model.rotation.y = BASE_Y + spinRef.current * Math.PI * 2
                 // Floating base
                 pivot.position.y = Math.sin(time * 0.001) * 0.15
             }
-            
+
             renderer.render(scene, camera)
         }
         animId = requestAnimationFrame(animate)
 
         const onResize = () => {
+            if (!container) return
             camera.aspect = container.clientWidth / container.clientHeight
             camera.updateProjectionMatrix()
             renderer.setSize(container.clientWidth, container.clientHeight)
         }
         window.addEventListener('resize', onResize)
 
+        // ── Robust Cleanup ──────────────────────────────────────────
         return () => {
             cancelAnimationFrame(animId)
             window.removeEventListener('resize', onResize)
+
+            // Dispose of everything in the scene
+            scene.traverse((object) => {
+                if (object instanceof THREE.Mesh) {
+                    object.geometry.dispose()
+                    if (object.material instanceof THREE.Material) {
+                        object.material.dispose()
+                    } else if (Array.isArray(object.material)) {
+                        object.material.forEach(m => m.dispose())
+                    }
+                }
+            })
+
+            // Dispose of renderer
             renderer.dispose()
-            if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement)
+            renderer.forceContextLoss()
+
+            if (container && container.contains(renderer.domElement)) {
+                container.removeChild(renderer.domElement)
+            }
         }
     }, [])
 
