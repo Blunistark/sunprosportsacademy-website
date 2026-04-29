@@ -1,6 +1,16 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+
+// Setup Draco Decoder (needed for compressed models)
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/')
+const gltfLoader = new GLTFLoader()
+gltfLoader.setDRACOLoader(dracoLoader)
+
+// Global Cache to prevent re-loading on remount
+let cachedModel: THREE.Group | null = null
 
 interface Logo3DProps {
     spinProgress?: number // 0→1: drives the 360 spin
@@ -41,22 +51,32 @@ export default function Logo3D({ spinProgress = 0, tilt = 0 }: Logo3DProps) {
         // ── Nested Group Architecture ───────────────────────────────
         // pivot (parent) handles TILT (Left/Right lean)
         // model (child) handles SPIN (Y rotation)
+        // pivot (parent) handles TILT (Left/Right lean)
+        // model (child) handles SPIN (Y rotation)
         const pivot = new THREE.Group()
         scene.add(pivot)
 
-        const loader = new GLTFLoader()
         let model: THREE.Group | null = null
         const BASE_Y = -Math.PI / 2
 
-        loader.load('/logo-3d.glb', (gltf) => {
-            model = gltf.scene
+        const setupModel = (loadedModel: THREE.Group) => {
+            model = loadedModel.clone() // Clone from cache
             const box = new THREE.Box3().setFromObject(model)
             model.position.sub(box.getCenter(new THREE.Vector3()))
             const size = box.getSize(new THREE.Vector3())
             model.scale.setScalar(3.5 / Math.max(size.x, size.y, size.z))
             model.rotation.y = BASE_Y
             pivot.add(model)
-        })
+        }
+
+        if (cachedModel) {
+            setupModel(cachedModel)
+        } else {
+            gltfLoader.load('/logo-3d.glb', (gltf) => {
+                cachedModel = gltf.scene
+                setupModel(cachedModel)
+            })
+        }
 
         let animId: number
         const animate = (time: number) => {
