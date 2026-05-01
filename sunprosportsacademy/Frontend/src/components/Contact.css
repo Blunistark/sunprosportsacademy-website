@@ -161,6 +161,8 @@
     color: var(--text-white);
     font-size: 0.9rem;
     line-height: 1.4;
+    word-break: break-all; /* For long emails */
+    overflow-wrap: anywhere;
 }
 
 @media (max-width: 991px) {
@@ -202,6 +204,12 @@
     .contact-info-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        overflow: hidden;
+    }
+
+    .info-content {
+        min-width: 0; /* Allows children to shrink */
+        width: 100%;
     }
 }
 
