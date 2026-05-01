@@ -88,9 +88,9 @@
 }
 
 .flag-logo-img {
-    width: 40vw;
-    min-width: 250px;
-    max-width: 600px;
+    width: 50vw;
+    min-width: 320px;
+    max-width: 750px;
     height: auto;
     filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
 }
@@ -104,7 +104,7 @@
     }
 
     .flag-logo-img {
-        width: 75%;
+        width: 85%;
     }
 
 }
@@ -116,6 +116,6 @@
     }
 
     .flag-logo-img {
-        width: 80%;
+        width: 90%;
     }
 }

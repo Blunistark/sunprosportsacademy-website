@@ -52,7 +52,7 @@ function LandingPage() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false)
-        }, 3500)
+        }, 6000)
         return () => clearTimeout(timer)
     }, [])
 
