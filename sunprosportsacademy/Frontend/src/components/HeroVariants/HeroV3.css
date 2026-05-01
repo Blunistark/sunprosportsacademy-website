@@ -72,7 +72,6 @@
     background: rgba(212, 175, 55, 0.15);
     padding: 8px 16px;
     border-radius: 100px;
-    margin-bottom: 2rem;
     border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
@@ -186,8 +185,19 @@
     position: relative;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.v3-visual-badge-container {
+    margin-bottom: 2rem;
+    z-index: 15;
+}
+
+.end-dot {
+    margin-left: 8px;
+    margin-right: 0 !important;
 }
 
 .stadium-float-container {
@@ -239,6 +249,12 @@
     .hero-v3-visual {
         order: -1;
         /* Stadium moves to top on mobile */
+        width: 100%;
+    }
+
+    .v3-visual-badge-container {
+        margin-bottom: 1rem;
+        margin-top: 1rem;
     }
 
     .stadium-float-container {
