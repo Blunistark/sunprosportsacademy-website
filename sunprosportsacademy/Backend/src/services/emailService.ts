@@ -10,13 +10,13 @@ const transporter = nodemailer.createTransport({
     pass: env.SMTP_PASS,
   },
   tls: {
-    rejectUnauthorized: false, // Helps with some Docker/SSL handshake issues
+    rejectUnauthorized: false,
   },
-  timeout: 10000, // 10 seconds timeout
-});
+} as any);
 
 export const emailService = {
   async sendContactEmail(data: { name: string, email: string, organization: string, note: string }) {
+    console.log(`Attempting to send email via ${env.SMTP_HOST}:${env.SMTP_PORT}...`);
     const mailOptions = {
       from: env.SMTP_FROM,
       to: env.CONTACT_RECEIVER_EMAIL, // Configurable recipient
