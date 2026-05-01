@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import sunProLogo from '../assets/Logo/Logo.png'
 import './Navbar.css'
 
 interface NavbarProps {
-    theme: 'dark' | 'light'
-    toggleTheme: () => void
     isAppLoading?: boolean
     scrolled: boolean
 }
 
-export default function Navbar({ theme, toggleTheme, isAppLoading, scrolled }: NavbarProps) {
+export default function Navbar({ isAppLoading, scrolled }: NavbarProps) {
     const [mobileOpen, setMobileOpen] = useState(false)
 
     const navLinks = [
@@ -93,13 +91,6 @@ export default function Navbar({ theme, toggleTheme, isAppLoading, scrolled }: N
                         </div>
 
                         <div className="navbar-actions">
-                            <button
-                                className="theme-toggle"
-                                onClick={toggleTheme}
-                                aria-label="Toggle theme"
-                            >
-                                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-                            </button>
 
                             <a href="#contact" className="navbar-cta desktop-only" onClick={(e) => { e.preventDefault(); scrollTo('#contact') }}>
                                 Consultation

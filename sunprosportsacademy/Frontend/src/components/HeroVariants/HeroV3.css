@@ -64,6 +64,7 @@
 .v3-badge {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     font-size: 0.75rem;
     font-weight: 700;
@@ -191,6 +192,9 @@
 }
 
 .v3-visual-badge-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
     margin-bottom: 2rem;
     z-index: 15;
 }
@@ -253,8 +257,16 @@
     }
 
     .v3-visual-badge-container {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         margin-top: 1rem;
+        padding: 0 20px; /* Prevent edge touching */
+    }
+
+    .v3-badge {
+        width: fit-content;
+        max-width: 100%;
+        text-align: center;
+        padding: 10px 20px;
     }
 
     .stadium-float-container {

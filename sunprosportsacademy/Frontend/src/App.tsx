@@ -1,7 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
 import HeroVariantSwitcher from './components/HeroVariants/HeroVariantSwitcher'
 import LoadingScreen from './components/LoadingScreen'
@@ -47,7 +46,6 @@ const queryClient = new QueryClient({
 })
 
 function LandingPage() {
-    const { theme, toggleTheme } = useTheme()
     const [isLoading, setIsLoading] = useState(true)
     const [scrolled, setScrolled] = useState(false)
 
@@ -71,7 +69,7 @@ function LandingPage() {
                 {isLoading && <LoadingScreen key="loader" />}
             </AnimatePresence>
 
-            <Navbar theme={theme} toggleTheme={toggleTheme} isAppLoading={isLoading} scrolled={scrolled} />
+            <Navbar isAppLoading={isLoading} scrolled={scrolled} />
             <main>
                 <HeroVariantSwitcher isAppLoading={isLoading} isScrolled={scrolled} />
                 <Suspense fallback={null}>
