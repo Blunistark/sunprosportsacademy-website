@@ -8,7 +8,7 @@ import bridgeportLogo from '../assets/collab-logos/bridgeport-labs.png'
 import athletiqLogo from '../assets/collab-logos/athletiq.png'
 import aquateinLogo from '../assets/collab-logos/aquatein.png'
 import jindalLogo from '../assets/collab-logos/jindal.png'
-import partnershipImg from '../assets/partnership-concept.png'
+import partnershipImg from '../assets/strategic-partnership-1.png'
 
 const partners = [
   { 

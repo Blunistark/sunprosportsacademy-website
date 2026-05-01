@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react'
 import logo from '../assets/Logo/Logo.png'
 import './Hero.css'
 
-import heroImg from '../assets/hero-arena.png'
+import heroImg from '../assets/partnership-concept.png'
 
 export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: boolean, isScrolled?: boolean }) {
     return (
