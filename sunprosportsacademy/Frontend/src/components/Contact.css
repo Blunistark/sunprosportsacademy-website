@@ -162,3 +162,15 @@
         margin-bottom: 30px;
     }
 }
+
+.contact-error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 77, 77, 0.1);
+    border-radius: 4px;
+}

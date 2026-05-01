@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
-import HeroVariantSwitcher from './components/HeroVariants/HeroVariantSwitcher'
+import HeroV6 from './components/HeroVariants/HeroV6'
 import LoadingScreen from './components/LoadingScreen'
 import Footer from './components/Footer'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -37,12 +37,12 @@ initializeStore()
 // Run: npm install @tanstack/react-query
 // Pages will be migrated to useQuery hooks when backend is connected
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      retry: 1,
+    defaultOptions: {
+        queries: {
+            staleTime: 1000 * 60 * 5, // 5 minutes
+            retry: 1,
+        },
     },
-  },
 })
 
 function LandingPage() {
@@ -52,7 +52,7 @@ function LandingPage() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false)
-        }, 6000)
+        }, 8000)
         return () => clearTimeout(timer)
     }, [])
 
@@ -71,7 +71,7 @@ function LandingPage() {
 
             <Navbar isAppLoading={isLoading} scrolled={scrolled} />
             <main>
-                <HeroVariantSwitcher isAppLoading={isLoading} isScrolled={scrolled} />
+                <HeroV6 />
                 <Suspense fallback={null}>
                     <WhatWeDo />
                     <About />

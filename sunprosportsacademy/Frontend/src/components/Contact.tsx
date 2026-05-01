@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle, Send, Building, Phone, Mail, MapPin } from 'lucide-react'
+import { CheckCircle, Send, Building, Phone, Mail, MapPin, AlertCircle } from 'lucide-react'
 import './Contact.css'
 
 export default function Contact() {
@@ -8,14 +8,37 @@ export default function Contact() {
     const [sending, setSending] = useState(false)
     const [sent, setSent] = useState(false)
 
+    const [error, setError] = useState(false)
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        if (!formRef.current) return
+
         setSending(true)
-        // Simulated send
-        setTimeout(() => {
+        setError(false)
+
+        const formData = new FormData(formRef.current)
+
+        try {
+            const response = await fetch(import.meta.env.VITE_FORMSPREE_URL || 'https://formspree.io/f/placeholder', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+
+            if (response.ok) {
+                setSending(false)
+                setSent(true)
+            } else {
+                throw new Error('Formspree error')
+            }
+        } catch (err) {
+            console.error('Submission Error:', err)
             setSending(false)
-            setSent(true)
-        }, 1500)
+            setError(true)
+        }
     }
 
     return (
@@ -155,6 +178,13 @@ export default function Contact() {
                                             </>
                                         )}
                                     </button>
+
+                                    {error && (
+                                        <div className="contact-error-message">
+                                            <AlertCircle size={16} />
+                                            <span>Something went wrong. Please try again or use the Gmail link.</span>
+                                        </div>
+                                    )}
                                 </form>
                             </>
                         )}

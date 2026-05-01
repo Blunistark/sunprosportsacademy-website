@@ -35,20 +35,10 @@ export default function HeroV6() {
                 </motion.div>
 
                 <h1 className="hero-title-container">
-                    <div className="hero-title-split v6-stabilizer">
-                        <div className="title-side title-left">
-                            <span>Building</span>
-                            <span>The</span>
-                            <span>Future</span>
-                        </div>
-
-                        <div className="hero-logo-center">
-                            {/* Logo removed but space preserved for alignment */}
-                        </div>
-
-                        <div className="title-side title-right">
-                            <span className="text-gold">Of Sports</span>
-                            <span className="text-gold">Infrastructure</span>
+                    <div className="v6-stabilizer">
+                        <div className="v6-title-main">
+                            Building The Future <br />
+                            <span className="text-gold">Of Sports Infrastructure</span>
                         </div>
                     </div>
                 </h1>

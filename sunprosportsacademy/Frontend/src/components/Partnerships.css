@@ -11,12 +11,13 @@
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border: 2px solid var(--accent-gold);
+    background: #001021;
 }
 
 .partnership-header-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     opacity: 0.9;
     transition: transform 0.5s ease;
 }
