@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import '../Hero.css'
-import heroImg from '../assets/strategic-partnership-1.png'
+import heroImg from '../../assets/strategic-partnership-1.png'
 
 export default function HeroV6() {
     return (
