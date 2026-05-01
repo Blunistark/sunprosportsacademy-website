@@ -1,0 +1,189 @@
+.hero-v5-wrapper {
+    width: 100%;
+    background: #000;
+}
+
+/* ─── Section 1: Flag ─── */
+.v5-section-flag {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: #050b14;
+}
+
+
+.v5-flag-fullscreen {
+    width: clamp(320px, 85vw, 1000px);
+    height: clamp(200px, 50vh, 500px);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    border-radius: 20px;
+    overflow: hidden;
+    /* Removed box-shadow here to avoid double-shadowing if you want a clean look */
+}
+
+.v5-flag-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 1; /* Increased visibility */
+}
+
+.v5-flag-logo-container {
+    position: absolute;
+    z-index: 10;
+    width: 35%; /* Relative to the new flag size */
+    max-width: 400px;
+}
+
+.v5-logo {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.8));
+}
+
+.v5-scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ─── Section 2: Content ─── */
+.v5-section-content {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.v5-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.v5-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.v5-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 31, 63, 0.7) 0%,
+            rgba(0, 0, 0, 0.9) 100%);
+}
+
+.v5-content-container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 1000px;
+    padding: 0 2rem;
+}
+
+.v5-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--accent-gold);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.v5-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-gold);
+    border-radius: 50%;
+}
+
+.v5-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.v5-title .gold {
+    color: var(--accent-gold);
+}
+
+.v5-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.v5-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.v5-btn {
+    padding: 16px 36px;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+.v5-btn-alt {
+    padding: 16px 36px;
+    font-weight: 700;
+    border-radius: 4px;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.v5-btn-alt:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .v5-title {
+        font-size: 2.5rem;
+    }
+    
+    .v5-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .v5-btn, .v5-btn-alt {
+        width: 100%;
+    }
+}
