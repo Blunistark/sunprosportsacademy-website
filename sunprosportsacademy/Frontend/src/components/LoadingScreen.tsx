@@ -81,9 +81,6 @@ export default function LoadingScreen() {
         >
             <div className="loading-bg" />
 
-            {/* Glow rings */}
-            <div className="glow-ring glow-ring-1" />
-            <div className="glow-ring glow-ring-2" />
 
             {/* Flag + Logo */}
             <div className="flag-wrapper">
