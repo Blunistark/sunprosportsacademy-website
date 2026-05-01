@@ -1,3 +1,8 @@
+/* ═══════════════════════════════════════════════════════════════
+   Loading Screen — Sun Pro Sports Academy
+   F1 Checkered Flag (no pole, logo only)
+   ═══════════════════════════════════════════════════════════════ */
+
 .loading-screen {
     position: fixed;
     inset: 0;
@@ -5,27 +10,169 @@
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    overflow: hidden;
 }
 
+/* Dark deep navy background */
 .loading-bg {
     position: absolute;
     inset: 0;
-    background: var(--bg-primary);
+    background: radial-gradient(ellipse at center,
+            #0b1a30 0%,
+            #060d1a 60%,
+            #000000 100%);
+    z-index: 0;
 }
 
-.loading-logo-container {
-    width: 50vw;
-    min-width: 320px;
-    max-width: 600px;
-    height: auto;
+/* ─── Glow Rings ─────────────────────────────────────────────── */
+.glow-ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.glow-ring-1 {
+    width: 650px;
+    height: 650px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.05) inset;
+    animation: ringPulse 4s ease-in-out infinite;
+}
+
+.glow-ring-2 {
+    width: 450px;
+    height: 450px;
+    border: 1px solid rgba(212, 175, 55, 0.07);
+    animation: ringPulse 4s ease-in-out infinite 1.2s;
+}
+
+@keyframes ringPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* ─── Flag Wrapper ───────────────────────────────────────────── */
+/* Relative container so the logo can be absolutely centred over the flag */
+.flag-wrapper {
+    position: relative;
+    width: clamp(340px, 90vw, 1100px);
+    height: clamp(240px, 68vh, 620px);
+    z-index: 10;
+    filter: drop-shadow(0 24px 80px rgba(0, 0, 0, 0.85));
+}
+
+/* ─── 3D Flag Shell ──────────────────────────────────────────── */
+.flag-3d-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    transform: rotateX(4deg);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    animation: flagSway 5s ease-in-out infinite;
+}
+
+@keyframes flagSway {
+    0% {
+        transform: rotateX(4deg) rotateY(-3deg);
+    }
+
+    30% {
+        transform: rotateX(3deg) rotateY(-2deg);
+    }
+
+    60% {
+        transform: rotateX(5deg) rotateY(-4deg);
+    }
+
+    100% {
+        transform: rotateX(4deg) rotateY(-3deg);
+    }
+}
+
+/* ─── Canvas ─────────────────────────────────────────────────── */
+.flag-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ─── Logo — Centred over the flag ───────────────────────────── */
+.flag-logo-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    z-index: 10000;
+    pointer-events: none;
+    z-index: 20;
 }
 
-.loading-logo-img {
-    width: 100%;
+.flag-logo-img {
+    width: 28vw;
+    min-width: 200px;
+    max-width: 400px;
     height: auto;
-}
+    filter:
+        drop-shadow(0 0 30px rgba(212, 175, 55, 0.75)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
+    animation: logoBreathe 3.5s ease-in-out infinite;
+}
+
+@keyframes logoBreathe {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 28px rgba(212, 175, 55, 0.7)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 48px rgba(212, 175, 55, 1.0)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
+    }
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .flag-wrapper {
+        width: 94vw;
+        height: clamp(200px, 52vw, 380px);
+    }
+
+    .flag-logo-img {
+        width: 66%;
+    }
+
+    .glow-ring-1 {
+        width: 340px;
+        height: 340px;
+    }
+
+    .glow-ring-2 {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .flag-wrapper {
+        width: 96vw;
+        height: clamp(160px, 55vw, 260px);
+    }
+
+    .flag-logo-img {
+        width: 70%;
+    }
+}
