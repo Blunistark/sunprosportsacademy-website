@@ -2,12 +2,14 @@ import { useState } from 'react'
 import HeroOriginal from '../Hero'
 import HeroV1 from './HeroV1'
 import HeroV2 from './HeroV2'
+import HeroV3 from './HeroV3'
 import './HeroVariantSwitcher.css'
 
 const variants = [
   { id: 'original', name: 'Original', component: HeroOriginal },
   { id: 'v1', name: 'Stadium Variant', component: HeroV1 },
-  { id: 'v2', name: 'Minimalist', component: HeroV2 }
+  { id: 'v2', name: 'Minimalist', component: HeroV2 },
+  { id: 'v3', name: 'Cinematic Glass', component: HeroV3 }
 ]
 
 export default function HeroVariantSwitcher({ isAppLoading, isScrolled }: { isAppLoading: boolean, isScrolled: boolean }) {

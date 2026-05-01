@@ -1,0 +1,298 @@
+/* ═══════════════════════════════════════════════════════════════
+   Hero V3 — Cinematic Glass Variant
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero-v3 {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: #050b14;
+    /* Deep, dark tech blue */
+    overflow: hidden;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    /* Prevent bottom cutoff */
+}
+
+/* Ambient Glows */
+.hero-ambient {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.glow-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+}
+
+.glow-2 {
+    bottom: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(0, 153, 255, 0.15) 0%, transparent 70%);
+}
+
+.hero-v3-container {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    height: 100%;
+}
+
+/* ─── Left Content (Glassmorphism) ─── */
+.hero-v3-content {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.v3-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+    background: rgba(212, 175, 55, 0.15);
+    padding: 8px 16px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent-gold);
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+}
+
+.v3-title {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #ffdf73 50%, #d4af37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.v3-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+}
+
+.v3-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.v3-btn-main {
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    font-weight: 600;
+    color: #fff;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.v3-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Right Visual (Floating Stadium) ─── */
+.hero-v3-visual {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stadium-float-container {
+    position: relative;
+    width: 140%;
+    /* Let it break out of the column slightly */
+    right: -10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.v3-stadium-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.9));
+}
+
+.v3-floating-logo {
+    position: absolute;
+    top: 20%;
+    left: 36%;
+    transform: translate(-50%, -50%);
+    width: 28%;
+    z-index: 10;
+    filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.8));
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1200px) {
+    .stadium-float-container {
+        width: 100%;
+        right: 0;
+    }
+
+    .hero-v3-content {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-v3-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-top: 2rem;
+    }
+
+    .hero-v3-visual {
+        order: -1;
+        /* Stadium moves to top on mobile */
+    }
+
+    .stadium-float-container {
+        width: 115%;
+        /* Slightly wider on mobile for impact */
+        margin-left: 0%;
+        /* Push further left as requested */
+        margin-bottom: 0 rem;
+    }
+
+    .v3-floating-logo {
+        width: 45%;
+        /* Make logo larger on mobile */
+        top: 1%;
+        /* Shift position down for mobile */
+        left: 28%;
+        /* Center the logo relative to the container */
+    }
+
+    .hero-v3-content {
+        text-align: center;
+    }
+
+    .v3-description {
+        margin: 0 auto 2rem;
+    }
+
+    .v3-actions {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .v3-stats {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .v3-title {
+        font-size: clamp(2.2rem, 10vw, 3rem);
+        /* Shrink so "ENGINEERED" fits */
+    }
+
+    .hero-v3-content {
+        padding: 1.5rem;
+        /* Tighter padding to save space */
+    }
+
+    .v3-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .v3-actions .btn {
+        width: 100%;
+    }
+}
