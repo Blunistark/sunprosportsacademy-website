@@ -41,14 +41,6 @@ export default function HeroV3() {
 
                     <div className="v3-stats">
                         <div className="stat">
-                            <span className="stat-number">100+</span>
-                            <span className="stat-label">Projects</span>
-                        </div>
-                        <div className="stat">
-                            <span className="stat-number">ISO</span>
-                            <span className="stat-label">Certified</span>
-                        </div>
-                        <div className="stat">
                             <span className="stat-number">24/7</span>
                             <span className="stat-label">Support</span>
                         </div>
