@@ -88,15 +88,16 @@ export default function HeroV5() {
                         <img src={logo} alt="Sun Pro" className="v5-logo" />
                     </motion.div>
                     
-                    <motion.div 
-                        className="v5-scroll-indicator"
-                        animate={{ y: [0, 10, 0] }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                    >
-                        <span>Scroll to Explore</span>
-                        <ArrowDown size={20} />
-                    </motion.div>
                 </div>
+                
+                <motion.div 
+                    className="v5-scroll-indicator"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                >
+                    <span>Scroll to Explore</span>
+                    <ArrowDown size={20} />
+                </motion.div>
             </section>
 
             {/* SECTION 2: CONTENT */}
