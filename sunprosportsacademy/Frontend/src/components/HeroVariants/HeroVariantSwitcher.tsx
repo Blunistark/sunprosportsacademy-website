@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Layers, X } from 'lucide-react'
 import HeroOriginal from '../Hero'
 import HeroV1 from './HeroV1'
 import HeroV2 from './HeroV2'
@@ -20,22 +21,34 @@ const variants = [
 
 export default function HeroVariantSwitcher({ isAppLoading, isScrolled }: { isAppLoading: boolean, isScrolled: boolean }) {
   const [activeVariant, setActiveVariant] = useState('original')
+  const [isOpen, setIsOpen] = useState(true)
 
   const ActiveHero = variants.find(v => v.id === activeVariant)?.component || HeroOriginal
 
   return (
     <div className="hero-variant-container">
-      <div className="variant-nav">
-        {variants.map(v => (
-          <button 
-            key={v.id} 
-            className={`variant-btn ${activeVariant === v.id ? 'active' : ''}`}
-            onClick={() => setActiveVariant(v.id)}
-          >
-            {v.name}
-          </button>
-        ))}
-      </div>
+      <button 
+        className={`variant-toggle-btn ${!isOpen ? 'pulse' : ''}`} 
+        onClick={() => setIsOpen(!isOpen)}
+        title={isOpen ? "Hide Variants" : "Show Variants"}
+      >
+        {isOpen ? <X size={20} /> : <Layers size={20} />}
+      </button>
+
+      {isOpen && (
+        <div className="variant-nav">
+          <div className="variant-nav-header">Select Variant</div>
+          {variants.map(v => (
+            <button 
+              key={v.id} 
+              className={`variant-btn ${activeVariant === v.id ? 'active' : ''}`}
+              onClick={() => setActiveVariant(v.id)}
+            >
+              {v.name}
+            </button>
+          ))}
+        </div>
+      )}
       <ActiveHero isAppLoading={isAppLoading} isScrolled={isScrolled} />
     </div>
   )
