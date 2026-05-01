@@ -1,24 +1,15 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
-import logo from '../assets/Logo/Logo.png'
-import './Hero.css'
+import logo from '../../assets/Logo/Logo.png'
+import './HeroV1.css'
 
-import heroImg from '../assets/strategic-partnership-1.png'
+import stadiumBase from '../../assets/stadium-base.png'
 
 export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: boolean, isScrolled?: boolean }) {
     return (
         <section className="hero" id="home">
-            <div className="hero-image-wrapper">
-                <motion.img
-                    src={heroImg}
-                    className="hero-image"
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 2, ease: "easeOut" }}
-                />
-                <div className="hero-overlay" />
-            </div>
+            <div className="hero-overlay" />
 
             <motion.div
                 className="hero-content container"
@@ -37,35 +28,29 @@ export default function Hero({ isAppLoading, isScrolled }: { isAppLoading?: bool
                     <span className="dot" />
                 </motion.div>
 
+                {/* Central Visual */}
+                <div className="stadium-logo-composite">
+                    <motion.img
+                        src={stadiumBase}
+                        className="stadium-base-img"
+                        initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                    />
+                    <motion.div 
+                        className="central-logo-wrapper"
+                        initial={{ opacity: 0, scale: 0.5, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
+                    >
+                        <img src={logo} alt="Sun Pro Trophy" className="trophy-logo" />
+                    </motion.div>
+                </div>
+
                 <h1 className="hero-title-container">
-                    <div className="hero-title-split">
-                        <div className="title-side title-left">
-                            <span>Building</span>
-                            <span>The</span>
-                            <span>Future</span>
-                        </div>
-
-                        <div className="hero-logo-center">
-                            {!isScrolled && (
-                                <motion.div
-                                    layoutId="hero-logo"
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 120,
-                                        damping: 24,
-                                        mass: 1
-                                    }}
-                                    style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                                >
-                                    <img src={logo} alt="Sun Pro" />
-                                </motion.div>
-                            )}
-                        </div>
-
-                        <div className="title-side title-right">
-                            <span className="text-gold">Of Sports</span>
-                            <span className="text-gold">Infrastructure</span>
-                        </div>
+                    <div className="hero-title-stacked">
+                        <span>Building The Future</span>
+                        <span className="text-gold">Of Sports Infrastructure</span>
                     </div>
                 </h1>
 

@@ -8,7 +8,7 @@ import bridgeportLogo from '../assets/collab-logos/bridgeport-labs.png'
 import athletiqLogo from '../assets/collab-logos/athletiq.png'
 import aquateinLogo from '../assets/collab-logos/aquatein.png'
 import jindalLogo from '../assets/collab-logos/jindal.png'
-import partnershipImg from '../assets/strategic-partnership-1.png'
+import partnershipImg from '../assets/partnership-concept.png'
 
 const partners = [
   { 
@@ -99,7 +99,7 @@ export default function Partnerships() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            05 / The Sun Pro Sports Academy Advantage
+            The Sun Pro Sports Academy Advantage
           </motion.span>
           <motion.h2 
             className="section-title"

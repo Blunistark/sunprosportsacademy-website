@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
+import HeroVariantSwitcher from './components/HeroVariants/HeroVariantSwitcher'
 import LoadingScreen from './components/LoadingScreen'
 import Footer from './components/Footer'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -54,7 +54,7 @@ function LandingPage() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false)
-        }, 1000)
+        }, 3500)
         return () => clearTimeout(timer)
     }, [])
 
@@ -73,7 +73,7 @@ function LandingPage() {
 
             <Navbar theme={theme} toggleTheme={toggleTheme} isAppLoading={isLoading} scrolled={scrolled} />
             <main>
-                <Hero isAppLoading={isLoading} isScrolled={scrolled} />
+                <HeroVariantSwitcher isAppLoading={isLoading} isScrolled={scrolled} />
                 <Suspense fallback={null}>
                     <WhatWeDo />
                     <About />
