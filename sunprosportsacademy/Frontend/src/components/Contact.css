@@ -4,6 +4,7 @@
 
 .contact {
     background: var(--bg-dark);
+    position: relative;
 }
 
 .contact-split {
