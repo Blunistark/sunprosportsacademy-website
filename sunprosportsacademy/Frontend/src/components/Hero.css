@@ -42,7 +42,7 @@
     width: 100%;
     max-width: var(--container-max);
     margin: 0 auto;
-    padding-top: 0px;
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,7 +61,7 @@
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 20rem;
+    margin-bottom: 2rem;
 }
 
 .hero-badge .dot {
@@ -269,4 +269,9 @@
     color: #fff;
     line-height: 1.1;
     text-align: center;
+}
+
+.hero-title-split.v6-stabilizer {
+    min-height: 200px;
+    /* Matches the original logo's approximate height */
 }

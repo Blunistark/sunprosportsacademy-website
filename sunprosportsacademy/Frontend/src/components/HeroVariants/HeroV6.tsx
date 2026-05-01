@@ -35,7 +35,7 @@ export default function HeroV6() {
                 </motion.div>
 
                 <h1 className="hero-title-container">
-                    <div className="hero-title-split">
+                    <div className="hero-title-split v6-stabilizer">
                         <div className="title-side title-left">
                             <span>Building</span>
                             <span>The</span>
