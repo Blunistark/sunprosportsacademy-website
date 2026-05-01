@@ -74,11 +74,10 @@ export default function Contact() {
                                                 href="https://mail.google.com/mail/?view=cm&fs=1&to=Bhanumurthy@Sunprosportsacademy.com&su=Consultation Request - Sun Pro Sports Academy&body=Hello Sun Pro Team,%0D%0A%0D%0AI would like to request a consultation for a sports infrastructure project.%0D%0A%0D%0AOrganization: %0D%0ALocation: %0D%0AProject Details: "
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="gmail-button"
+                                                className="info-value"
                                             >
-                                                Open Gmail <Send size={14} style={{ marginLeft: 6 }} />
+                                                Bhanumurthy@Sunprosportsacademy.com
                                             </a>
-                                            <a href="mailto:Bhanumurthy@Sunprosportsacademy.com" className="info-email-secondary">Bhanumurthy@Sunprosportsacademy.com</a>
                                         </div>
                                     </div>
                                     <div className="contact-info-item full-width">
