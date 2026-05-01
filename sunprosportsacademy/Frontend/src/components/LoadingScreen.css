@@ -127,22 +127,9 @@
     min-width: 250px;
     max-width: 600px;
     height: auto;
-    filter:
-        drop-shadow(0 0 30px rgba(212, 175, 55, 0.75)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
-    animation: logoBreathe 3.5s ease-in-out infinite;
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
 }
 
-@keyframes logoBreathe {
-
-    0%,
-    100% {
-        filter: drop-shadow(0 0 28px rgba(212, 175, 55, 0.7)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
-    }
-
-    50% {
-        filter: drop-shadow(0 0 48px rgba(212, 175, 55, 1.0)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
-    }
-}
 
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
