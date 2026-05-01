@@ -162,3 +162,36 @@
         margin-bottom: 30px;
     }
 }
+.gmail-button {
+    display: inline-flex;
+    align-items: center;
+    background: #ea4335;
+    color: white !important;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.gmail-button:hover {
+    background: #d33828;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3);
+}
+
+.info-email-secondary {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5) !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.info-email-secondary:hover {
+    color: var(--accent-gold) !important;
+}
