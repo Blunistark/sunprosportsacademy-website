@@ -21,7 +21,7 @@ export default function Contact() {
         const data = Object.fromEntries(formData.entries())
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'}/api/public/contact`, {
+            const response = await fetch('/api/public/contact', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
