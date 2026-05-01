@@ -7,6 +7,7 @@ import { appointmentService } from '../services/appointmentService';
 import { invoiceService } from '../services/invoiceService';
 import { inventoryService } from '../services/inventoryService';
 import { settingsService } from '../services/settingsService';
+import { emailService } from '../services/emailService';
 
 // ─── Branch ─────────────────────────────────────────────────
 export const branchController = {
@@ -88,6 +89,15 @@ export const publicController = {
   async contact(req: Request, res: Response) {
     const { default: prisma } = await import('../utils/prisma');
     const submission = await prisma.contactSubmission.create({ data: req.body });
+    
+    // Send email notification (don't await to avoid delaying response, or await for reliability)
+    try {
+      await emailService.sendContactEmail(req.body);
+    } catch (err) {
+      console.error('Failed to send contact email:', err);
+      // We don't fail the request if email fails but DB succeeded
+    }
+
     res.status(201).json(submission);
   },
 };

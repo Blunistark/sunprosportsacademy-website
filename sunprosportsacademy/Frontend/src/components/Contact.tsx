@@ -18,13 +18,15 @@ export default function Contact() {
         setError(false)
 
         const formData = new FormData(formRef.current)
+        const data = Object.fromEntries(formData.entries())
 
         try {
-            const response = await fetch(import.meta.env.VITE_FORMSPREE_URL || 'https://formspree.io/f/placeholder', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'}/api/public/contact`, {
                 method: 'POST',
-                body: formData,
+                body: JSON.stringify(data),
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             })
 
