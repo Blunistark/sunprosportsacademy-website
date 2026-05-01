@@ -49,11 +49,6 @@ export default function Contact() {
                 <div className="contact-split">
                     {/* Image Side */}
                     <div className="contact-image-side">
-                        <img 
-                            src="https://images.unsplash.com/photo-1541339907198-e08756ebafe1?q=80&w=2670&auto=format&fit=crop" 
-                            alt="Consultation" 
-                            loading="lazy" 
-                        />
                         <div className="contact-image-overlay">
                             <span className="contact-image-text">
                                 Vision<br />Design<br />Execution

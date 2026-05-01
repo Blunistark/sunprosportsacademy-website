@@ -140,7 +140,7 @@
     .title-side {
         text-align: center;
         align-items: center;
-        font-size: clamp(1.8rem, 10vw, 2.5rem);
+        font-size: clamp(1.5rem, 10vw, 2.5rem);
     }
 
     .hero-logo-center {
@@ -263,12 +263,16 @@
 }
 
 .v6-title-main {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(1.8rem, 8vw, 5rem);
     font-weight: 800;
     text-transform: uppercase;
     color: #fff;
     line-height: 1.1;
     text-align: center;
+    overflow-wrap: break-word;
+    word-break: keep-all; /* Prevents splitting short words, but allows wrap */
+    max-width: 95vw;
+    margin: 0 auto;
 }
 
 .hero-title-split.v6-stabilizer {
