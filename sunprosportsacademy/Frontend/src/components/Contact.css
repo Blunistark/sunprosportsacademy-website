@@ -106,6 +106,15 @@
     justify-content: center;
 }
 
+.contact-error {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+}
+
+.contact-error a {
+    color: var(--accent-gold);
+}
+
 .contact-success {
     text-align: center;
     padding: 40px 0;

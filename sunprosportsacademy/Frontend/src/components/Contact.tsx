@@ -3,19 +3,44 @@ import { motion } from 'framer-motion'
 import { CheckCircle, Send, Building, Phone, Mail, MapPin } from 'lucide-react'
 import './Contact.css'
 
+// FormSubmit relays submissions to this inbox (activated once via its confirmation email)
+const CONTACT_EMAIL = 'bhanumurthy@sunprosportsacademy.com'
+const CONTACT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`
+
 export default function Contact() {
     const formRef = useRef<HTMLFormElement>(null)
     const [sending, setSending] = useState(false)
     const [sent, setSent] = useState(false)
+    const [error, setError] = useState(false)
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const data = new FormData(e.currentTarget)
         setSending(true)
-        // Simulated send
-        setTimeout(() => {
-            setSending(false)
+        setError(false)
+        try {
+            const res = await fetch(CONTACT_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({
+                    _subject: 'New consultation request — sunprosportsacademy.com',
+                    _template: 'table',
+                    _honey: data.get('_honey'),
+                    name: data.get('user_name'),
+                    email: data.get('user_email'),
+                    organization: data.get('organization'),
+                    details: data.get('note'),
+                }),
+            })
+            const result = await res.json()
+            // FormSubmit returns success as the string "true"/"false"
+            if (!res.ok || String(result.success) !== 'true') throw new Error(result.message)
             setSent(true)
-        }, 1500)
+        } catch {
+            setError(true)
+        } finally {
+            setSending(false)
+        }
     }
 
     return (
@@ -83,6 +108,9 @@ export default function Contact() {
                                 </div>
 
                                 <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
+                                    {/* Honeypot: bots fill it, FormSubmit drops those submissions */}
+                                    <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
                                     <div className="form-group">
                                         <label className="form-label" htmlFor="contact-name">Full Name</label>
                                         <input
@@ -148,6 +176,13 @@ export default function Contact() {
                                             </>
                                         )}
                                     </button>
+
+                                    {error && (
+                                        <p className="contact-error" role="alert">
+                                            Something went wrong sending your request. Please email us directly at{' '}
+                                            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+                                        </p>
+                                    )}
                                 </form>
                             </>
                         )}
