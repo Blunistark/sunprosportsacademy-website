@@ -1,0 +1,43 @@
+# Render Blueprint — SunPro Sports Academy frontend (static site)
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: sunpro-frontend
+    runtime: static
+    rootDir: sunprosportsacademy/Frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeployTrigger: commit
+
+    # Render adds the www → root redirect automatically
+    domains:
+      - sunprosportsacademy.com
+
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+
+    # SPA fallback so react-router paths (/admin, /admin/login, ...) load index.html
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+    headers:
+      # Vite fingerprints everything in /assets, so it is safe to cache forever
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
