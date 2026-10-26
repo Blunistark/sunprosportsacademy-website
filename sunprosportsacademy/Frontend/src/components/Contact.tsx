@@ -3,6 +3,9 @@ import { motion } from 'framer-motion'
 import { CheckCircle, Send, Building, Phone, Mail, MapPin, AlertCircle } from 'lucide-react'
 import './Contact.css'
 
+// FormSubmit relays submissions to this inbox (activated once via its confirmation email)
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/bhanumurthy@sunprosportsacademy.com'
+
 export default function Contact() {
     const formRef = useRef<HTMLFormElement>(null)
     const [sending, setSending] = useState(false)
@@ -18,23 +21,32 @@ export default function Contact() {
         setError(false)
 
         const formData = new FormData(formRef.current)
-        const data = Object.fromEntries(formData.entries())
 
         try {
-            const response = await fetch('/api/public/contact', {
+            const response = await fetch(CONTACT_ENDPOINT, {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: JSON.stringify({
+                    _subject: 'New consultation request — sunprosportsacademy.com',
+                    _template: 'table',
+                    _honey: formData.get('_honey'),
+                    name: formData.get('user_name'),
+                    email: formData.get('user_email'),
+                    organization: formData.get('organization'),
+                    details: formData.get('note'),
+                }),
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             })
+            const result = await response.json()
 
-            if (response.ok) {
+            // FormSubmit returns success as the string "true"/"false"
+            if (response.ok && String(result.success) === 'true') {
                 setSending(false)
                 setSent(true)
             } else {
-                throw new Error('Formspree error')
+                throw new Error(result.message ?? 'FormSubmit error')
             }
         } catch (err) {
             console.error('Submission Error:', err)
@@ -110,6 +122,9 @@ export default function Contact() {
                                 </div>
 
                                 <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
+                                    {/* Honeypot: bots fill it, FormSubmit drops those submissions */}
+                                    <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
                                     <div className="form-group">
                                         <label className="form-label" htmlFor="contact-name">Full Name</label>
                                         <input
